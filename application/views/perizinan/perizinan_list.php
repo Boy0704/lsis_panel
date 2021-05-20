@@ -41,10 +41,19 @@
 		<th>Sampai</th>
 		<th>Action</th>
             </tr><?php
+            $warna = "";
             foreach ($perizinan_data as $perizinan)
             {
+                if (strtotime($perizinan->sampai) < strtotime(date('Y-m-d'))) {
+                    $warna = 'class="alert alert-danger"';
+                } elseif (strtotime($perizinan->sampai) > strtotime(date('Y-m-d'))) {
+                    $warna = 'class="alert alert-success"';
+                } elseif (substr($perizinan->sampai, 0,9) == date('Y-m-d')) {
+                    $warna = 'class="alert alert-warning"';
+                }
+
                 ?>
-                <tr>
+                <tr <?php echo $warna ?>>
 			<td width="80px"><?php echo ++$start ?></td>
 			<td><?php echo $perizinan->unit_kerja ?></td>
 			<td><?php echo $perizinan->jenis ?></td>

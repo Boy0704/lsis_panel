@@ -34,7 +34,6 @@
         <li><a href="app/pengembangan"><i class="fa fa-object-group"></i> <span>History Tracking Satpam</span></a></li></li>
         <li><a href="perizinan"><i class="fa fa-bank"></i> <span>Daftar Perizinan</span></a></li></li>
         <li><a href="kasus"><i class="fa fa-balance-scale"></i> <span>Daftar Kasus Hukum</span></a></li></li>
-        <li><a href="jabatan"><i class="fa fa-cube"></i> <span>Master Jabatan </span></a></li></li>
         <li><a href="users"><i class="fa fa-users"></i> <span>Users </span></a></li>
 
         <?php } elseif ($this->session->userdata('level') == 'user') {?>

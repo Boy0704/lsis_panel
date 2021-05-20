@@ -6,7 +6,7 @@
         </div>
 	    <div class="form-group">
             <label for="date">Tanggal Surat <?php echo form_error('tanggal_surat') ?></label>
-            <input type="text" class="form-control" name="tanggal_surat" id="tanggal_surat" placeholder="Tanggal Surat" value="<?php echo $tanggal_surat; ?>" />
+            <input type="date" class="form-control" name="tanggal_surat" id="tanggal_surat" placeholder="Tanggal Surat" value="<?php echo $tanggal_surat; ?>" />
         </div>
 	    <div class="form-group">
             <label for="varchar">Nama Pelapor <?php echo form_error('nama_pelapor') ?></label>
@@ -14,7 +14,7 @@
         </div>
 	    <div class="form-group">
             <label for="date">Tanggal Kejadian <?php echo form_error('tanggal_kejadian') ?></label>
-            <input type="text" class="form-control" name="tanggal_kejadian" id="tanggal_kejadian" placeholder="Tanggal Kejadian" value="<?php echo $tanggal_kejadian; ?>" />
+            <input type="date" class="form-control" name="tanggal_kejadian" id="tanggal_kejadian" placeholder="Tanggal Kejadian" value="<?php echo $tanggal_kejadian; ?>" />
         </div>
 	    <div class="form-group">
             <label for="int">Jlh <?php echo form_error('jlh') ?></label>
