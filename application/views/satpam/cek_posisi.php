@@ -28,8 +28,8 @@
     var map;
     function load() {
         map = new google.maps.Map(document.getElementById("map"), {
-            center : new google.maps.LatLng(-1.609972, 103.607254),
-            zoom : 15,
+            center : new google.maps.LatLng(<?php echo $latitude ?>, <?php echo $longitude ?>),
+            zoom : 12,
             mapTypeId : 'roadmap'
         });
         var infoWindow = new google.maps.InfoWindow;

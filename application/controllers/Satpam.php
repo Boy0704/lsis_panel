@@ -14,12 +14,13 @@ class Satpam extends CI_Controller {
 
 	public function cek_posisi($id_user)
 	{
-		// $data = array(
-  //           'konten' => 'satpam/cek_posisi',
-  //           'judul_page' => 'Daftar Semua Satpam',
-  //       );
-  //       $this->load->view('v_index', $data);
-		$this->load->view('satpam/cek_posisi');
+		$this->db->where('id_user', $id_user);
+		$this->db->order_by('created_at', 'desc');
+		$this->db->limit(1);
+		$br = $this->db->get('log_lokasi')->row();
+		$data['latitude']= $br->latitude;
+		$data['longitude']= $br->longitude;
+		$this->load->view('satpam/cek_posisi',$data);
 	}
 
 	public function lokasi_satpam($id_user)
