@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-md-12">
-		<table class="table table-stripped" id="example1">
+		<table class="table table-stripped">
 			<thead>
 				<tr>
 					<th>No.</th>
