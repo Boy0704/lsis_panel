@@ -1,7 +1,7 @@
 
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('perizinan/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php echo anchor(site_url('perizinan/create').'?'.param_get(),'Tambah', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -54,9 +54,9 @@
 			<td><?php echo $perizinan->sampai ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('perizinan/update/'.$perizinan->id_perizinan),'<span class="label label-info">Ubah</span>'); 
+				echo anchor(site_url('perizinan/update/'.$perizinan->id_perizinan).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
 				echo ' | '; 
-				echo anchor(site_url('perizinan/delete/'.$perizinan->id_perizinan),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo anchor(site_url('perizinan/delete/'.$perizinan->id_perizinan).'?'.param_get(),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
 			</td>
 		</tr>
@@ -68,7 +68,7 @@
         <div class="row">
             <div class="col-md-6">
                 <a href="#" class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
-		<?php echo anchor(site_url('perizinan/excel'), 'Excel', 'class="btn btn-primary"'); ?>
+		<?php echo anchor(site_url('perizinan/excel'), 'Download Excel', 'class="btn btn-primary"'); ?>
 	    </div>
             <div class="col-md-6 text-right">
                 <?php echo $pagination ?>

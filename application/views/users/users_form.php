@@ -13,13 +13,17 @@
             <input type="text" class="form-control" name="password" id="password" placeholder="Password" value="<?php echo $password; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="int">Jabatan <?php echo form_error('id_jabatan') ?></label>
-            <select name="id_jabatan" class="form-control">
-                <option value="<?php echo $id_jabatan ?>"><?php echo get_data('jabatan','id_jabatan',$id_jabatan,'jabatan') ?></option>
-                <?php foreach ($this->db->get('jabatan')->result() as $br): ?>
-                    <option value="<?php echo $br->id_jabatan ?>"><?php echo $br->jabatan ?></option>
+            <label for="int">Level <?php echo form_error('id_level') ?></label>
+            <select name="id_level" class="form-control">
+                <option value="<?php echo $id_level ?>"><?php echo get_data('level','id_level',$id_level,'level') ?></option>
+                <?php foreach ($this->db->get('level')->result() as $br): ?>
+                    <option value="<?php echo $br->id_level ?>"><?php echo $br->level ?></option>
                 <?php endforeach ?>
             </select>
+        </div>
+        <div class="form-group">
+            <label for="varchar">Jabatan <?php echo form_error('jabatan') ?></label>
+            <input type="text" class="form-control" name="jabatan" id="jabatan" placeholder="Jabatan" value="<?php echo $jabatan; ?>" />
         </div>
 	    <div class="form-group">
             <label for="varchar">Foto <?php echo form_error('foto') ?></label>

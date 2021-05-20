@@ -9,6 +9,25 @@ class App extends CI_Controller {
         
     }
 
+    public function form_agreement()
+    {
+        if ($_GET) {
+            $data = array(
+                'konten' => 'mobile/form_agreement',
+                'judul_page' => 'From Agreement',
+            );
+            $this->load->view('v_index', $data);
+        }
+        
+    }
+
+    public function simpan_form_agreement()
+    {
+        log_data($_GET);
+        log_data($_FILES);
+        log_data($_POST);
+    }
+
     public function pengembangan()
     {
         $this->session->set_flashdata('message', alert_biasa('Menu masih dalam tahap pengembangan !','warning'));

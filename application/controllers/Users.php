@@ -76,7 +76,8 @@ class Users extends CI_Controller
 	    'nama' => set_value('nama'),
 	    'username' => set_value('username'),
 	    'password' => set_value('password'),
-	    'id_jabatan' => set_value('id_jabatan'),
+        'id_level' => set_value('id_level'),
+	    'jabatan' => set_value('jabatan'),
 	    'foto' => set_value('foto'),
 	    'token' => set_value('token'),
 	);
@@ -94,7 +95,8 @@ class Users extends CI_Controller
 		'nama' => $this->input->post('nama',TRUE),
 		'username' => $this->input->post('username',TRUE),
 		'password' => $this->input->post('password',TRUE),
-		'id_jabatan' => $this->input->post('id_jabatan',TRUE),
+        'id_level' => $this->input->post('id_level',TRUE),
+		'jabatan' => $this->input->post('jabatan',TRUE),
 		'foto' => $this->input->post('foto',TRUE),
 		'token' => $this->input->post('token',TRUE),
 	    );
@@ -119,7 +121,8 @@ class Users extends CI_Controller
 		'nama' => set_value('nama', $row->nama),
 		'username' => set_value('username', $row->username),
 		'password' => set_value('password', $row->password),
-		'id_jabatan' => set_value('id_jabatan', $row->id_jabatan),
+        'id_level' => set_value('id_level', $row->id_level),
+		'jabatan' => set_value('jabatan', $row->jabatan),
 		'foto' => set_value('foto', $row->foto),
 		'token' => set_value('token', $row->token),
 	    );
@@ -141,7 +144,8 @@ class Users extends CI_Controller
 		'nama' => $this->input->post('nama',TRUE),
 		'username' => $this->input->post('username',TRUE),
 		'password' => $this->input->post('password',TRUE),
-		'id_jabatan' => $this->input->post('id_jabatan',TRUE),
+        'id_level' => $this->input->post('id_level',TRUE),
+		'jabatan' => $this->input->post('jabatan',TRUE),
 		'foto' => $this->input->post('foto',TRUE),
 		'token' => $this->input->post('token',TRUE),
 	    );
@@ -171,7 +175,8 @@ class Users extends CI_Controller
 	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
 	$this->form_validation->set_rules('username', 'username', 'trim|required');
 	$this->form_validation->set_rules('password', 'password', 'trim|required');
-	$this->form_validation->set_rules('id_jabatan', 'id jabatan', 'trim|required');
+    $this->form_validation->set_rules('id_level', 'Level', 'trim|required');
+	$this->form_validation->set_rules('jabatan', 'jabatan', 'trim|required');
 
 	$this->form_validation->set_rules('id_user', 'id_user', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

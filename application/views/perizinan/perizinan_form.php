@@ -18,11 +18,11 @@
         </div>
 	    <div class="form-group">
             <label for="date">Dari <?php echo form_error('dari') ?></label>
-            <input type="text" class="form-control" name="dari" id="dari" placeholder="Dari" value="<?php echo $dari; ?>" />
+            <input type="date" class="form-control" name="dari" id="dari" placeholder="Dari" value="<?php echo $dari; ?>" />
         </div>
 	    <div class="form-group">
             <label for="date">Sampai <?php echo form_error('sampai') ?></label>
-            <input type="text" class="form-control" name="sampai" id="sampai" placeholder="Sampai" value="<?php echo $sampai; ?>" />
+            <input type="date" class="form-control" name="sampai" id="sampai" placeholder="Sampai" value="<?php echo $sampai; ?>" />
         </div>
 	    <input type="hidden" name="id_perizinan" value="<?php echo $id_perizinan; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

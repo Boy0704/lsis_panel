@@ -70,7 +70,7 @@ class Perizinan extends CI_Controller
         $data = array(
             'judul_page' => 'perizinan/perizinan_form',
             'konten' => 'perizinan/perizinan_form',
-            'button' => 'Create',
+            'button' => 'Simpan',
             'action' => site_url('perizinan/create_action'),
 	    'id_perizinan' => set_value('id_perizinan'),
 	    'unit_kerja' => set_value('unit_kerja'),
@@ -101,7 +101,7 @@ class Perizinan extends CI_Controller
 
             $this->Perizinan_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('perizinan'));
+            redirect(site_url('perizinan').'?'.param_get());
         }
     }
     
@@ -148,7 +148,7 @@ class Perizinan extends CI_Controller
 
             $this->Perizinan_model->update($this->input->post('id_perizinan', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('perizinan'));
+            redirect(site_url('perizinan').'?'.param_get());
         }
     }
     
@@ -159,10 +159,10 @@ class Perizinan extends CI_Controller
         if ($row) {
             $this->Perizinan_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('perizinan'));
+            redirect(site_url('perizinan').'?'.param_get());
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('perizinan'));
+            redirect(site_url('perizinan').'?'.param_get());
         }
     }
 

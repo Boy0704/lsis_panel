@@ -55,70 +55,22 @@
 <body class="hold-transition skin-green-light sidebar-mini">
 <div class="wrapper">
 
-  <header class="main-header">
-    <!-- Logo -->
-    <a href="" class="logo">
-      <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini"><b>A</b>LT</span>
-      <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg"><?php echo get_setting('nama_aplikasi') ?></span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-      <!-- Sidebar toggle button-->
-      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </a>
-
-      <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-          
-          <!-- User Account: style can be found in dropdown.less -->
-          <li class="dropdown user user-menu">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="image/user/<?php echo $this->session->userdata('foto') ?>" class="user-image" alt="User Image">
-              <span class="hidden-xs"><?php echo $this->session->userdata('nama'); ?></span>
-            </a>
-            <ul class="dropdown-menu">
-              <!-- User image -->
-              
-              <!-- Menu Footer-->
-              <li class="user-footer">
-                <div class="pull-left">
-                  <?php if ($this->session->userdata('level') == 'user'): ?>
-                    <a href="app/update_profil/<?php echo $this->session->userdata('id_user'); ?>" class="btn btn-default btn-flat">Profile</a>
-                  <?php endif ?>
-                </div>
-                <div class="pull-right">
-                  <?php if ($this->session->userdata('level') == 'user'): ?>
-                    <a href="login_user/logout" class="btn btn-default btn-flat">Keluar</a>
-                  <?php else: ?>
-                    <a href="login/logout" class="btn btn-default btn-flat">Keluar</a>
-                  <?php endif ?>
-                </div>
-              </li>
-            </ul>
-          </li>
-          <!-- Control Sidebar Toggle Button -->
-          <!-- <li>
-            <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-          </li> -->
-        </ul>
-      </div>
-    </nav>
-  </header>
-  <!-- Left side column. contains the logo and sidebar -->
-  <?php $this->load->view('page/side'); ?>
+  <?php if (!isset($_GET['mobile'])): ?>
+    <?php $this->load->view('page/header'); ?>
+    <!-- Left side column. contains the logo and sidebar -->
+    <?php $this->load->view('page/side'); ?>
+  <?php endif ?>
+  
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
+    <?php if (!isset($_GET['mobile'])): ?>
     <section class="content-header">
       <h1>
+        
         <?php echo $judul_page ?>
+        
         <small></small>
       </h1>
       <!-- <ol class="breadcrumb">
@@ -127,6 +79,7 @@
         <li class="active">Data tables</li>
       </ol> -->
     </section>
+    <?php endif ?>
 
     <!-- Main content -->
     <section class="content">
@@ -154,6 +107,7 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  <?php if (!isset($_GET['mobile'])): ?>
   <footer class="main-footer">
     <div class="pull-right hidden-xs">
       <b>Version</b> 1.0
@@ -161,6 +115,7 @@
     <strong>Copyright &copy; <?php echo date('Y') ?> <a href="#">LSIS ADMIN</a>.</strong> All rights
     reserved.
   </footer>
+  <?php endif ?>
 
   <!-- Control Sidebar -->
   

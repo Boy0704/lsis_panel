@@ -74,7 +74,7 @@ class Kasus extends CI_Controller
         $data = array(
             'judul_page' => 'kasus/kasus_form',
             'konten' => 'kasus/kasus_form',
-            'button' => 'Create',
+            'button' => 'Simpan',
             'action' => site_url('kasus/create_action'),
 	    'id_kasus' => set_value('id_kasus'),
 	    'nomor_surat' => set_value('nomor_surat'),
@@ -113,7 +113,7 @@ class Kasus extends CI_Controller
 
             $this->Kasus_model->insert($data);
             $this->session->set_flashdata('message', 'Create Record Success');
-            redirect(site_url('kasus'));
+            redirect(site_url('kasus').'?'.param_get());
         }
     }
     
@@ -168,7 +168,7 @@ class Kasus extends CI_Controller
 
             $this->Kasus_model->update($this->input->post('id_kasus', TRUE), $data);
             $this->session->set_flashdata('message', 'Update Record Success');
-            redirect(site_url('kasus'));
+            redirect(site_url('kasus').'?'.param_get());
         }
     }
     
@@ -179,10 +179,10 @@ class Kasus extends CI_Controller
         if ($row) {
             $this->Kasus_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('kasus'));
+            redirect(site_url('kasus').'?'.param_get());
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
-            redirect(site_url('kasus'));
+            redirect(site_url('kasus').'?'.param_get());
         }
     }
 

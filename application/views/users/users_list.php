@@ -36,9 +36,9 @@
 		<th>Nama</th>
 		<th>Username</th>
 		<th>Password</th>
-		<th>Id Jabatan</th>
+        <th>Level</th>
+		<th>Jabatan</th>
 		<th>Foto</th>
-		<th>Token</th>
 		<th>Action</th>
             </tr><?php
             foreach ($users_data as $users)
@@ -49,9 +49,9 @@
 			<td><?php echo $users->nama ?></td>
 			<td><?php echo $users->username ?></td>
 			<td><?php echo $users->password ?></td>
-			<td><?php echo get_data('jabatan','id_jabatan',$users->id_jabatan,'jabatan') ?></td>
+            <td><?php echo get_data('level','id_level',$users->id_level,'level') ?></td>
+			<td><?php echo $users->jabatan ?></td>
 			<td><img src="image/user/<?php echo $users->foto ?>" style="width: 50px;"></td>
-			<td><?php echo $users->token ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('users/update/'.$users->id_user),'<span class="label label-info">Ubah</span>'); 

@@ -1,7 +1,7 @@
 
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('kasus/create'),'Create', 'class="btn btn-primary"'); ?>
+                <?php echo anchor(site_url('kasus/create').'?'.param_get(),'Tambah', 'class="btn btn-primary"'); ?>
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -62,9 +62,9 @@
 			<td><?php echo $kasus->keterangan ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
-				echo anchor(site_url('kasus/update/'.$kasus->id_kasus),'<span class="label label-info">Ubah</span>'); 
+				echo anchor(site_url('kasus/update/'.$kasus->id_kasus).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
 				echo ' | '; 
-				echo anchor(site_url('kasus/delete/'.$kasus->id_kasus),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+				echo anchor(site_url('kasus/delete/'.$kasus->id_kasus).'?'.param_get(),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
 				?>
 			</td>
 		</tr>
@@ -76,10 +76,20 @@
         <div class="row">
             <div class="col-md-6">
                 <a href="#" class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
-		<?php echo anchor(site_url('kasus/excel'), 'Excel', 'class="btn btn-primary"'); ?>
+		<?php echo anchor(site_url('kasus/excel'), 'Downlaod Excel', 'class="btn btn-primary"'); ?>
 	    </div>
             <div class="col-md-6 text-right">
                 <?php echo $pagination ?>
             </div>
         </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#tes").click(function(event) {
+                    // WebAppInterface.vibrate(1000);
+                    // WebAppInterface.snakBar("Hallo Boy");
+                    // WebAppInterface.showToast("Hallo Boy");
+                });
+            });
+        </script>
     
