@@ -29,7 +29,7 @@
     function load() {
         map = new google.maps.Map(document.getElementById("map"), {
             center : new google.maps.LatLng(<?php echo $latitude ?>, <?php echo $longitude ?>),
-            zoom : 12,
+            zoom : 18,
             mapTypeId : 'roadmap'
         });
         var infoWindow = new google.maps.InfoWindow;
