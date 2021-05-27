@@ -33,7 +33,8 @@
         <table class="table table-bordered" style="margin-bottom: 10px">
             <tr>
                 <th>No</th>
-		<th>Nama</th>
+        <th>Nama</th>
+		<th>Email</th>
 		<th>Username</th>
 		<th>Password</th>
         <th>Level</th>
@@ -46,7 +47,8 @@
                 ?>
                 <tr>
 			<td width="80px"><?php echo ++$start ?></td>
-			<td><?php echo $users->nama ?></td>
+            <td><?php echo $users->nama ?></td>
+			<td><?php echo $users->email ?></td>
 			<td><?php echo $users->username ?></td>
 			<td><?php echo $users->password ?></td>
             <td><?php echo get_data('level','id_level',$users->id_level,'level') ?></td>

@@ -4,6 +4,10 @@
             <label for="varchar">Nama <?php echo form_error('nama') ?></label>
             <input type="text" class="form-control" name="nama" id="nama" placeholder="Nama" value="<?php echo $nama; ?>" />
         </div>
+        <div class="form-group">
+            <label for="varchar">Email <?php echo form_error('email') ?></label>
+            <input type="email" class="form-control" name="email" id="nama" placeholder="Email Aktif" value="<?php echo $email; ?>" />
+        </div>
 	    <div class="form-group">
             <label for="varchar">Username <?php echo form_error('username') ?></label>
             <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="<?php echo $username; ?>" />
@@ -26,8 +30,9 @@
             <input type="text" class="form-control" name="jabatan" id="jabatan" placeholder="Jabatan" value="<?php echo $jabatan; ?>" />
         </div>
 	    <div class="form-group">
-            <label for="varchar">Foto <?php echo form_error('foto') ?></label>
-            <input type="file" class="form-control" name="foto" id="foto" placeholder="Foto" value="<?php echo $foto; ?>" />
+            <label for="varchar">Foto </label>
+            <input type="hidden" name="foto_old" value="<?php echo $foto ?>">
+            <input type="file" class="form-control" name="foto" id="foto" placeholder="Foto" required/>
         </div>
 	    <input type="hidden" name="id_user" value="<?php echo $id_user; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 

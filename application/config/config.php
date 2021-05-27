@@ -27,6 +27,13 @@ $root = "http://".$_SERVER['HTTP_HOST'];
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 $config['base_url']    = "$root";
 
+define('mapboxToken', 'your-mapbox-public-key');
+define('firebaseDb', 'https://firebasedb-url/');
+define('keyfcm', 'AAAABgI4j4I:APA91bGeyLJxcQS4uy9ZKM7x8PbpOQPuH6wd6ELKDbQwBhHpXQcSYvtWLIJO8DBVD0m4nrPnOfi65Th5XA1hHWL3Tjf-66Yy4VoLoT_7zCAscwNTiPPRCU8wFAarG5Sm4rdeeMGJM868');
+
+
+define('time_zone', 'Asia/Jakarta');
+
 /*
 |--------------------------------------------------------------------------
 | Index File

@@ -51,7 +51,8 @@ class Users extends CI_Controller
         if ($row) {
             $data = array(
 		'id_user' => $row->id_user,
-		'nama' => $row->nama,
+        'nama' => $row->nama,
+		'email' => $row->email,
 		'username' => $row->username,
 		'password' => $row->password,
 		'id_jabatan' => $row->id_jabatan,
@@ -73,12 +74,13 @@ class Users extends CI_Controller
             'button' => 'Create',
             'action' => site_url('users/create_action'),
 	    'id_user' => set_value('id_user'),
-	    'nama' => set_value('nama'),
+        'nama' => set_value('nama'),
+	    'email' => set_value('email'),
 	    'username' => set_value('username'),
 	    'password' => set_value('password'),
         'id_level' => set_value('id_level'),
 	    'jabatan' => set_value('jabatan'),
-	    'foto' => set_value('foto'),
+        'foto' => set_value('foto'),
 	    'token' => set_value('token'),
 	);
         $this->load->view('v_index', $data);
@@ -92,12 +94,13 @@ class Users extends CI_Controller
             $this->create();
         } else {
             $data = array(
-		'nama' => $this->input->post('nama',TRUE),
+        'nama' => $this->input->post('nama',TRUE),
+		'email' => $this->input->post('email',TRUE),
 		'username' => $this->input->post('username',TRUE),
 		'password' => $this->input->post('password',TRUE),
         'id_level' => $this->input->post('id_level',TRUE),
 		'jabatan' => $this->input->post('jabatan',TRUE),
-		'foto' => $this->input->post('foto',TRUE),
+		'foto' => $foto = $img = upload_gambar_biasa('user', 'image/user/', 'jpg|png|jpeg', 10000, 'foto'),
 		'token' => $this->input->post('token',TRUE),
 	    );
 
@@ -118,12 +121,13 @@ class Users extends CI_Controller
                 'button' => 'Update',
                 'action' => site_url('users/update_action'),
 		'id_user' => set_value('id_user', $row->id_user),
-		'nama' => set_value('nama', $row->nama),
+        'nama' => set_value('nama', $row->nama),
+		'email' => set_value('email', $row->email),
 		'username' => set_value('username', $row->username),
 		'password' => set_value('password', $row->password),
         'id_level' => set_value('id_level', $row->id_level),
 		'jabatan' => set_value('jabatan', $row->jabatan),
-		'foto' => set_value('foto', $row->foto),
+        'foto' => set_value('foto', $row->foto),
 		'token' => set_value('token', $row->token),
 	    );
             $this->load->view('v_index', $data);
@@ -140,13 +144,19 @@ class Users extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->update($this->input->post('id_user', TRUE));
         } else {
+        if ($_FILES == NULL) {
+            $foto = $this->input->post('foto_old');
+        } else {
+            $foto = $img = upload_gambar_biasa('user', 'image/user/', 'jpg|png|jpeg', 10000, 'foto');
+        }
             $data = array(
-		'nama' => $this->input->post('nama',TRUE),
+        'nama' => $this->input->post('nama',TRUE),
+		'email' => $this->input->post('email',TRUE),
 		'username' => $this->input->post('username',TRUE),
 		'password' => $this->input->post('password',TRUE),
         'id_level' => $this->input->post('id_level',TRUE),
 		'jabatan' => $this->input->post('jabatan',TRUE),
-		'foto' => $this->input->post('foto',TRUE),
+		'foto' => $foto,
 		'token' => $this->input->post('token',TRUE),
 	    );
 
@@ -172,7 +182,8 @@ class Users extends CI_Controller
 
     public function _rules() 
     {
-	$this->form_validation->set_rules('nama', 'nama', 'trim|required');
+    $this->form_validation->set_rules('nama', 'nama', 'trim|required');
+	$this->form_validation->set_rules('email', 'email', 'trim|required');
 	$this->form_validation->set_rules('username', 'username', 'trim|required');
 	$this->form_validation->set_rules('password', 'password', 'trim|required');
     $this->form_validation->set_rules('id_level', 'Level', 'trim|required');

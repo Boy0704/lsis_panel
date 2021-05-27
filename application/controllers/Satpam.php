@@ -23,6 +23,36 @@ class Satpam extends CI_Controller {
 		$this->load->view('satpam/cek_posisi',$data);
 	}
 
+	public function cek_lokasi($id)
+	{
+		$this->db->where('id', $id);
+		$br = $this->db->get('log_lokasi')->row();
+		$data['latitude']= $br->latitude;
+		$data['longitude']= $br->longitude;
+		$data['address']= $br->address;
+		$data['nama']= get_data('users','id_user',$br->id_user,'nama');
+		$data['date']= $br->created_at;
+		$this->load->view('satpam/lihat_posisi',$data);
+	}
+
+	public function history($id_user)
+	{
+		$data = array(
+            'konten' => 'satpam/history',
+            'judul_page' => 'History Tracking',
+        );
+        $this->load->view('v_index', $data);
+	}
+
+	public function download($id_user)
+	{
+		$data = array(
+            'konten' => 'satpam/download',
+            'judul_page' => 'History Tracking',
+        );
+        $this->load->view('v_index', $data);
+	}
+
 	public function lokasi_satpam($id_user)
 	{
 		$this->db->where('id_user', $id_user);

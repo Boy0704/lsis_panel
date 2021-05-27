@@ -28,6 +28,16 @@ class App extends CI_Controller {
         log_data($_POST);
     }
 
+    public function hapus_riwayat_tracking()
+    {
+        $tgl1 = date('Y-m-d');
+        $tgl2 = date('Y-m-d', strtotime('-1 days', strtotime($tgl1)));
+        $sql = $this->db->query( " DELETE FROM log_lokasi WHERE created_at NOT LIKE '$tgl2%' AND created_at NOT LIKE '$tgl1%' " );
+        if ($sql) {
+            echo "berhasil di hapus";
+        }
+    }
+
     public function pengembangan()
     {
         $this->session->set_flashdata('message', alert_biasa('Menu masih dalam tahap pengembangan !','warning'));

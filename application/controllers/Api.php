@@ -7,6 +7,11 @@ use Restserver\Libraries\REST_Controller;
 
 class Api extends REST_Controller {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model('Notif_model');
+    }
 
 	public function index_get()
 	{
@@ -121,6 +126,20 @@ class Api extends REST_Controller {
                 'message' => 'berhasil',
                 'data' => [$condition]
             );
+
+            $nama = get_data('users','id_user',$decoded_data->id_user,'nama');
+            $title = "Pertanyaan terbaru dari $nama";
+            $id = $decoded_data->id_user;
+            $pesan = substr($decoded_data->pertanyaan, 0, 100)."..";
+            $method = "1";
+
+            $this->db->select('token');
+            // $this->db->where('id_user!=', $decoded_data->id_user);
+            $users = $this->db->get('users');
+            foreach ($users->result() as $rw) {
+                $this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $rw->token);
+            }
+
         } else {
             $condition = array('data'=>"kosong");
             $message = array(
@@ -145,7 +164,31 @@ class Api extends REST_Controller {
                 'id_user'=> $rw->id_user,
                 'nama_penanya' => get_data('users','id_user',$rw->id_user,'nama'),
                 'foto' => get_data('users','id_user',$rw->id_user,'foto'),
-                'waktu' => $rw->created_at
+                'waktu' => time_since($rw->created_at)
+
+            ));
+        }
+        $message = array(
+            'data' => $data
+        );
+
+        $this->response($message, 200);
+    }
+
+    public function pertanyaan_home_get()
+    {
+        $this->db->order_by('id_pertanyaan', 'desc');
+        $this->db->limit(3);
+        $forums = $this->db->get('pertanyaan');
+        $data = array();
+        foreach ($forums->result() as $rw) {
+            array_push($data, array(
+                'id_pertanyaan' => $rw->id_pertanyaan,
+                'pertanyaan' => substr($rw->pertanyaan, 0, 150)."..",
+                'id_user'=> $rw->id_user,
+                'nama_penanya' => get_data('users','id_user',$rw->id_user,'nama'),
+                'foto' => get_data('users','id_user',$rw->id_user,'foto'),
+                'waktu' => time_since($rw->created_at)
 
             ));
         }
@@ -177,7 +220,7 @@ class Api extends REST_Controller {
                 'id_user'=> $rw->id_user,
                 'nama_penjawab' => get_data('users','id_user',$rw->id_user,'nama'),
                 'foto' => get_data('users','id_user',$rw->id_user,'foto'),
-                'waktu' => $rw->created_at
+                'waktu' => time_since($rw->created_at)
 
             ));
         }
@@ -279,7 +322,7 @@ class Api extends REST_Controller {
 
         $this->db->where('id_user', $decoded_data->id_user);
         $this->db->where('latitude', $decoded_data->latitude);
-        $this->db->where('longitude', $decoded_data->longitude);
+        // $this->db->where('longitude', $decoded_data->longitude);
         $this->db->like('created_at', date('Y-m-d'), 'AFTER');
         $cek = $this->db->get('log_lokasi');
         if ($cek->num_rows() > 0) {
@@ -295,6 +338,7 @@ class Api extends REST_Controller {
                 'latitude' => $decoded_data->latitude,
                 'longitude' => $decoded_data->longitude,
                 'bearing' => $decoded_data->bearing,
+                'address' => $decoded_data->address,
                 'created_at' => get_waktu()
                 )
             );
