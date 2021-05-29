@@ -79,14 +79,33 @@ class Satpam extends CI_Controller {
 
 	public function lokasi_satpam_all()
 	{
-		$this->db->select('a.id_user,b.nama,a.latitude,a.longitude,a.created_at');
-		$this->db->from('log_lokasi a');
-		$this->db->join('users b', 'a.id_user = b.id_user', 'inner');
-		$this->db->join('jadwal_satpam_detail c', 'a.id_user = c.id_user', 'inner');
-		$this->db->where('b.id_level', '8');
-		$this->db->group_by('a.id_user');
-		$this->db->order_by('a.created_at', 'desc');
-		$data = $this->db->get();
+
+		$this->db->select('a.id_user, a.nama');
+		$this->db->from('users a');
+		$this->db->join('jadwal_satpam_detail b', 'a.id_user = b.id_user', 'inner');
+		$this->db->join('jadwal_satpam c', 'c.id_jadwal = b.id_jadwal', 'inner');
+		$this->db->where('c.tanggal', date('Y-m-d'));
+		$this->db->where('a.id_level', '8');
+		$user = $this->db->get();
+
+		$data = [];
+		foreach ($user->result() as $rw) {
+
+			$this->db->select('latitude,longitude,created_at');
+			$this->db->where('id_user', $rw->id_user);
+			$this->db->order_by('created_at', 'desc');
+			$log = $this->db->get('log_lokasi')->row();
+
+			array_push($data, array(
+				'id_user' => $rw->id_user,
+				'nama' => $rw->nama,
+				'latitude' => $log->latitude,
+				'longitude' => $log->longitude,
+				'created_at' => $log->created_at
+			));
+		}
+
+
 		$attribs=array('id_user','nama','latitude','longitude','created_at');
 
 
@@ -99,13 +118,13 @@ class Satpam extends CI_Controller {
 	    $dom->appendChild( $root );
 
 
-	    foreach ($data->result() as $rs) {
+	    foreach ($data as $key => $rs) {
 	    	$node=$dom->createElement('marker');
 	        $root->appendChild( $node );
 
 	        foreach( $attribs as $attrib ){
 	            $attr = $dom->createAttribute( $attrib );
-	            $value= $dom->createTextNode( $rs->$attrib );
+	            $value= $dom->createTextNode( $rs[$attrib] );
 	            $attr->appendChild( $value );
 	            $node->appendChild( $attr );
 	        }
