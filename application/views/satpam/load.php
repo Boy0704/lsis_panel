@@ -28,18 +28,22 @@
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$("#jadwal_satpam").click(function(event) {
+			event.preventDefault();
 			window.location="jadwal_satpam?<?php echo param_get() ?>";
 		});
 
 		$("#data_satpam").click(function(event) {
+			event.preventDefault();
 			window.location="satpam/view?<?php echo param_get() ?>";
 		});
 
 		$("#jadwal_satpam_now").click(function(event) {
+			event.preventDefault();
 			window.location="satpam/hari_ini?<?php echo param_get() ?>";
 		});
 
 		$("#lokasi_semua_satpam").click(function(event) {
+			event.preventDefault();
 			window.location="satpam/all_jaga?<?php echo param_get() ?>";
 		});
 	});
