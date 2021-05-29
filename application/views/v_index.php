@@ -85,9 +85,16 @@
     <section class="content">
       <div class="row">
         <div class="col-xs-12">
+
+          <?php if (isset($_GET['konten_manual'])): ?>
+            <?php $this->load->view($konten); ?>
+          <?php else: ?>
+
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title"></h3>
+              <h3 class="box-title"><?php if (isset($_GET['mobile'])) {
+                echo $judul_page;
+              } ?></h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -96,6 +103,8 @@
             <!-- /.box-body -->
           </div>
           <!-- /.box -->
+
+          <?php endif ?>
 
           
           <!-- /.box -->

@@ -36,7 +36,7 @@
 
         // your first call to get & process inital data
 
-        downloadUrl("<?php echo base_url() ?>satpam/lokasi_satpam/<?php echo $this->uri->segment(3) ?>", processXML);
+        downloadUrl("<?php echo base_url() ?>satpam/lokasi_satpam_all", processXML);
     }
 
     function processXML(data) {
@@ -75,7 +75,7 @@
             // set timeout after you finished processing & displaying the first lot of markers. Rember that requests on the server can take some time to complete. SO you want to make another one
             // only when the first one is completed.
             setTimeout(function() {
-                downloadUrl("<?php echo base_url() ?>satpam/lokasi_satpam/<?php echo $this->uri->segment(3) ?>", processXML);
+                downloadUrl("<?php echo base_url() ?>satpam/lokasi_satpam_all", processXML);
             }, 5000);
     }
 

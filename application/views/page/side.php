@@ -28,10 +28,10 @@
         
         <?php if ($this->session->userdata('level') == 'admin'){ ?>
         <li><a href="app"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="app/pengembangan"><i class="fa fa-calendar-check-o"></i> <span>Jadwal Satpam </span></a></li></li>
-        <li><a href="app/pengembangan"><i class="fa fa-clone"></i> <span>Online Agreement  </span></a></li></li>
-        <li><a href="app/pengembangan"><i class="fa fa-map"></i> <span>Fruit Tracking  </span></a></li></li>
-        <li><a href="app/pengembangan"><i class="fa fa-object-group"></i> <span>History Tracking Satpam</span></a></li></li>
+        <li><a href="jadwal_satpam?id_user=<?php echo $this->session->userdata('id_user'); ?>"><i class="fa fa-calendar-check-o"></i> <span>Jadwal Satpam </span></a></li></li>
+        <li><a href="Agreement?&id_user=<?php echo $this->session->userdata('id_user'); ?>"><i class="fa fa-clone"></i> <span>Online Agreement  </span></a></li></li>
+        <li><a href="fruit?id_user=<?php echo $this->session->userdata('id_user'); ?>"><i class="fa fa-map"></i> <span>Fruit Tracking  </span></a></li></li>
+        <li><a href="satpam?id_user=<?php echo $this->session->userdata('id_user'); ?>"><i class="fa fa-object-group"></i> <span>History Tracking Satpam</span></a></li></li>
         <li><a href="perizinan?id_user=<?php echo $this->session->userdata('id_user'); ?>"><i class="fa fa-bank"></i> <span>Daftar Perizinan</span></a></li></li>
         <li><a href="kasus?id_user=<?php echo $this->session->userdata('id_user'); ?>"><i class="fa fa-balance-scale"></i> <span>Daftar Kasus Hukum</span></a></li></li>
         <li><a href="users"><i class="fa fa-users"></i> <span>Users </span></a></li>
