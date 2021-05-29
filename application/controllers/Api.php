@@ -54,6 +54,8 @@ class Api extends REST_Controller {
                 'status_gps' => $users->status_gps
             );
             if ($users->status_login == '1') {
+                $this->db->where('id_user', $users->id_user);
+                $this->db->update('users', array('status_login'=>'2'));
                 $message = array(
                     'kode' => '200',
                     'message' => 'berhasil',
