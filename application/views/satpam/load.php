@@ -30,7 +30,13 @@
 	jQuery(document).ready(function($) {
 		$("#jadwal_satpam").click(function(event) {
 			event.preventDefault();
+			<?php 
+			if ($this->input->get('level') == '8' || $this->input->get('level') == '9') {
+			 ?>
+			 WebAppInterface.showToast("kamu tidak memiliki akses ke sini !");
+			<?php } else { ?>
 			window.location="jadwal_satpam?<?php echo param_get() ?>";
+			<?php } ?>
 		});
 
 		$("#data_satpam").click(function(event) {
