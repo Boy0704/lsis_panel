@@ -52,9 +52,11 @@
 			<td><?php echo $users->username ?></td>
 			<td><?php echo $users->password ?></td>
             <td><?php echo get_data('level','id_level',$users->id_level,'level') ?></td>
-			<td><?php echo $users->jabatan ?></td>
+            <td><?php echo $users->jabatan ?></td>
+			<td><?php echo ($users->status_login == '1') ? '<span class="label label-success">Sedang Login</span>' : '<span class="label label-info">Tidak Login</span>' ?></td>
 			<td><img src="image/user/<?php echo $users->foto ?>" style="width: 50px;"></td>
 			<td style="text-align:center" width="200px">
+                <a href="users/reset_login/<?php echo $users->id_user ?>" class="label label-warning" onclick="javasciprt: return confirm('Yakin akan reset login akun ini ?')">Reset Login</a>
 				<?php 
 				echo anchor(site_url('users/update/'.$users->id_user),'<span class="label label-info">Ubah</span>'); 
 				echo ' | '; 

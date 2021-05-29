@@ -109,6 +109,15 @@ class Users extends CI_Controller
             redirect(site_url('users'));
         }
     }
+
+    public function reset_login($id_user)
+    {
+        $this->db->where('id_user', $id_user);
+        $this->db->update('users', array('status_login'=>'1'));
+
+        $this->session->set_flashdata('message', 'Berhasil di reset');
+            redirect(site_url('users'));
+    }
     
     public function update($id) 
     {
