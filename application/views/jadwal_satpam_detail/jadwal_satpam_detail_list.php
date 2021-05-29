@@ -23,7 +23,7 @@
 		<th>Shift</th>
         <th>Area</th>
         <th>Date at</th>
-		<th>Oleh</th>
+		<th>Di edit oleh</th>
 		<th>Action</th>
             </tr>
             </thead>
