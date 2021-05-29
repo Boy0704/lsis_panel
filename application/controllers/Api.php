@@ -53,11 +53,21 @@ class Api extends REST_Controller {
                 'token' => $users->token,
                 'status_gps' => $users->status_gps
             );
-            $message = array(
-                'kode' => '200',
-                'message' => 'berhasil',
-                'data' => [$condition]
-            );
+            if ($users->status_login == '1') {
+                $message = array(
+                    'kode' => '200',
+                    'message' => 'berhasil',
+                    'data' => [$condition]
+                );
+            } else {
+                $condition = array('data'=>"kosong");
+                $message = array(
+                    'kode' => '404',
+                    'message' => 'Akun anda sedang login diperangkat lain',
+                    'data' => [$condition]
+                );
+            }
+            
         } else {
             $condition = array('data'=>"kosong");
             $message = array(
