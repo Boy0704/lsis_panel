@@ -51,6 +51,22 @@ class Satpam extends CI_Controller {
 
 	public function all_jaga()
 	{
+		$this->db->select('a.id_user, a.nama');
+		$this->db->from('users a');
+		$this->db->join('jadwal_satpam_detail b', 'a.id_user = b.id_user', 'inner');
+		$this->db->join('jadwal_satpam c', 'c.id_jadwal = b.id_jadwal', 'inner');
+		$this->db->where('c.tanggal', date('Y-m-d'));
+		$this->db->where('a.id_level', '14');
+		$user = $this->db->get();
+
+		if ($user->num_rows() > 0) {
+			?>
+			 <script type="text/javascript">
+			 	WebAppInterface.showToast("Tidak Jadwal Satpam hari ini !");
+			 </script>
+			<?php
+		}
+
 		$this->db->order_by('created_at', 'desc');
 		$this->db->limit(1);
 		$br = $this->db->get('log_lokasi')->row();
