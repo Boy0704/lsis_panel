@@ -90,7 +90,7 @@ class Users extends CI_Controller
     {
         $this->_rules();
 
-        $img = upload_gambar_biasa('user', 'image/user/', 'jpg|png|jpeg', 10000, 'foto')
+        $img = upload_gambar_biasa('user', 'image/user/', 'jpg|png|jpeg', 10000, 'foto');
 
         if ($this->form_validation->run() == FALSE) {
             $this->create();
