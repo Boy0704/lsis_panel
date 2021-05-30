@@ -7,7 +7,7 @@ header("Content-Disposition: attachment; filename=tracking_$nama.xls");
 	<div class="col-md-12">
 		<h4>Riwayat Tracking <?php echo $nama ?></h4>
 		<hr>
-		<table class="table table-stripped">
+		<table class="table table-stripped" border="1">
 			<thead>
 				<tr>
 					<th>No.</th>

@@ -86,11 +86,7 @@ class Satpam extends CI_Controller {
 
 	public function download($id_user)
 	{
-		$data = array(
-            'konten' => 'satpam/download',
-            'judul_page' => 'History Tracking',
-        );
-        $this->load->view('v_index', $data);
+        $this->load->view('satpam/download');
 	}
 
 	public function lokasi_satpam_all()
