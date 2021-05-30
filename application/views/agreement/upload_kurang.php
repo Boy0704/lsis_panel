@@ -12,7 +12,9 @@
 			<div class="form-group">
 				<label>Upload Data yang kurang</label>
 				<input type="hidden" name="id_agree" value="<?php echo $id ?>">
-				<input type='file' name='files[]' multiple="" class="form-control" required="">
+				<input type='file' name='files[]' class="form-control" required="">
+				<div id="tambah"></div>
+				<p style="margin-top:10px;"><span id="add" class="btn btn-xs btn-success">Tambah Upload</span></p>
 			</div>
 			<div class="form-group">
 				<button type="submit" class="btn btn-primary">Simpan</button>
@@ -20,3 +22,11 @@
 		</form>
 	</div>
 </div>
+
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$("#add").click(function(event) {
+			$("#tambah").append('<input type="file" name="files[]" class="form-control" required="">');
+		});
+	});
+</script>
