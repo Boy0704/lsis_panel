@@ -11,7 +11,7 @@
 			<tbody>
 				<?php
 				$no = 1;
-				$this->db->where('id_level', '8');
+				$this->db->where('id_level', '14');
 				$data = $this->db->get('users');
 				 foreach ($data->result() as $rw): ?>
 					<tr>
