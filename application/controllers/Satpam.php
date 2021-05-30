@@ -59,7 +59,7 @@ class Satpam extends CI_Controller {
 		$this->db->where('a.id_level', '14');
 		$user = $this->db->get();
 
-		if ($user->num_rows() > 0) {
+		if ($user->num_rows() == 0) {
 			?>
 			 <script type="text/javascript">
 			 	WebAppInterface.showToast("Tidak Jadwal Satpam hari ini !");
