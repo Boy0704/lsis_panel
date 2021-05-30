@@ -60,7 +60,7 @@
             <td><?php echo $fruit->tujuan ?></td>
 			<td>
                 <?php 
-                if ($rw->status == 'finish') {
+                if ($fruit->status == 'finish') {
                     echo '<span class="label label-success">Finish</span>';
                 } else {
                     echo '<span class="label label-default">Delivery</span>';
