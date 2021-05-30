@@ -18,14 +18,27 @@
             <label for="afdeling">Afdeling <?php echo form_error('afdeling') ?></label>
             <textarea class="form-control" rows="3" name="afdeling" id="afdeling" placeholder="Afdeling"><?php echo $afdeling; ?></textarea>
         </div>
+        <div class="form-group">
+            <label for="tujuan">Tujuan </label>
+            <textarea class="form-control" rows="3" name="tujuan" id="tujuan" placeholder="Tujuan" required><?php echo $tujuan; ?></textarea>
+        </div>
 	    <div class="form-group">
             <label for="datetime">Tgl Angkut <?php echo form_error('tgl_angkut') ?></label>
             <input type="datetime-local" class="form-control" name="tgl_angkut" id="tgl_angkut" placeholder="Tgl Angkut" value="<?php echo $tgl_angkut; ?>" />
         </div>
-	    <div class="form-group">
-            <label for="datetime">Tgl Bongkar <?php echo form_error('tgl_bongkar') ?></label>
-            <input type="datetime-local" class="form-control" name="tgl_bongkar" id="tgl_bongkar" placeholder="Tgl Bongkar" value="<?php echo $tgl_bongkar; ?>" />
-        </div>
+	    <?php if (isset($_GET['id_level'])): ?>
+            <?php if ($_GET['id_level']): ?>
+                <div class="form-group">
+                    <label for="datetime">Tgl Bongkar </label>
+                    <input type="datetime-local" class="form-control" name="tgl_bongkar" id="tgl_bongkar" placeholder="Tgl Bongkar" value="<?php echo $tgl_bongkar; ?>" />
+                </div>
+
+                <div class="form-group">
+                    <label for="varchar">Berat Bersih </label>
+                    <input type="text" class="form-control" name="berat_bersih" id="berat_bersih" placeholder="Berat bersih" value="<?php echo $berat_bersih; ?>" required/>
+                </div>
+            <?php endif ?>
+        <?php endif ?>
 	    <input type="hidden" name="id_fruit" value="<?php echo $id_fruit; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
 	    <a href="<?php echo site_url('fruit').'?'.param_get() ?>" class="btn btn-default">Cancel</a>

@@ -1,7 +1,12 @@
 
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('fruit/create').'?'.param_get(),'Create', 'class="btn btn-primary"'); ?>
+                <?php if (isset($_GET['id_level'])): ?>
+                    <?php if ($_GET['id_level'] == '7' || $_GET['id_level'] == '14'): ?>
+                        <?php echo anchor(site_url('fruit/create').'?'.param_get(),'Create', 'class="btn btn-primary"'); ?>
+                    <?php endif ?>
+                <?php endif ?>
+                
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -37,7 +42,9 @@
 		<th>No Plat</th>
 		<th>Afdeling</th>
 		<th>Tgl Angkut</th>
-		<th>Tgl Bongkar</th>
+        <th>Tgl Bongkar</th>
+        <th>Tujuan</th>
+		<th>Status</th>
 		<th>Action</th>
             </tr><?php
             foreach ($fruit_data as $fruit)
@@ -49,12 +56,29 @@
 			<td><?php echo $fruit->no_plat ?></td>
 			<td><?php echo $fruit->afdeling ?></td>
 			<td><?php echo $fruit->tgl_angkut ?></td>
-			<td><?php echo $fruit->tgl_bongkar ?></td>
+            <td><?php echo $fruit->tgl_bongkar ?></td>
+            <td><?php echo $fruit->tujuan ?></td>
+			<td>
+                <?php 
+                if ($rw->status == 'finish') {
+                    echo '<span class="label label-success">Finish</span>';
+                } else {
+                    echo '<span class="label label-default">Delivery</span>';
+                }
+                 ?>         
+            </td>
 			<td style="text-align:center" width="200px">
+                <a href="fruit/cek_posisi/<?php echo $rw->id_user ?>" class="label label-info">Cek Posisi</a>
+                <a href="fruit/history/<?php echo $rw->id_user.'?mobile=1' ?>" class="label label-warning">History</a>
+                <a href="fruit/download/<?php echo $rw->id_user.'?mobile=1' ?>" class="label label-success">Download History</a>
 				<?php 
-				echo anchor(site_url('fruit/update/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
+				if (isset($_GET['id_level'])) {
+                    if ($_GET['id_level'] == '15') {
+                        echo anchor(site_url('fruit/update/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
+                    }
+                }
                 if (isset($_GET['id_level'])) {
-                    if ($this->input->get('id_level') != '8' OR $this->input->get('id_level') != '9') {
+                    if ($this->input->get('id_level') != '7' OR $this->input->get('id_level') != '14') {
                         echo ' | '; 
                         echo anchor(site_url('fruit/delete/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
                     }

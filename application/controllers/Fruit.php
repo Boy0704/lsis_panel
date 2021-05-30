@@ -12,6 +12,89 @@ class Fruit extends CI_Controller
         $this->load->library('form_validation');
     }
 
+    public function cek_posisi($id_user)
+    {
+        $this->db->where('id_user', $id_user);
+        $this->db->order_by('created_at', 'desc');
+        $this->db->limit(1);
+        $br = $this->db->get('log_lokasi')->row();
+        $data['latitude']= $br->latitude;
+        $data['longitude']= $br->longitude;
+        $this->load->view('fruit/cek_posisi',$data);
+    }
+
+    public function cek_lokasi($id)
+    {
+        $this->db->where('id', $id);
+        $br = $this->db->get('log_lokasi')->row();
+        $data['latitude']= $br->latitude;
+        $data['longitude']= $br->longitude;
+        $data['address']= $br->address;
+        $data['nama']= get_data('users','id_user',$br->id_user,'nama');
+        $data['date']= $br->created_at;
+        $this->load->view('fruit/lihat_posisi',$data);
+    }
+
+    public function history($id_user)
+    {
+        $data = array(
+            'konten' => 'fruit/history',
+            'judul_page' => 'History Tracking',
+        );
+        $this->load->view('v_index', $data);
+    }
+
+    public function download($id_user)
+    {
+        $this->load->view('fruit/download');
+    }
+
+    public function lokasi_supir($id_user,$all='0')
+    {
+        $this->db->select('a.id_user,b.nama,a.latitude,a.longitude,a.created_at');
+        $this->db->from('log_lokasi a');
+        $this->db->join('users b', 'a.id_user = b.id_user', 'inner');
+        $this->db->where('a.id_user', $id_user);
+        $this->db->where('b.id_level', '15');
+        $this->db->order_by('a.created_at', 'desc');
+        if ($all == '1') {
+            // code...
+        } else {
+            $this->db->limit(1);
+        }
+        
+        $data = $this->db->get();
+        $attribs=array('id_user','nama','latitude','longitude','created_at');
+
+
+        $dom=new DOMDocument('1.0','utf-8');
+        $dom->formatOutput=true;
+        $dom->standalone=true;
+        $dom->recover=true;
+
+        $root=$dom->createElement('markers');
+        $dom->appendChild( $root );
+
+
+        foreach ($data->result() as $rs) {
+            $node=$dom->createElement('marker');
+            $root->appendChild( $node );
+
+            foreach( $attribs as $attrib ){
+                $attr = $dom->createAttribute( $attrib );
+                $value= $dom->createTextNode( $rs->$attrib );
+                $attr->appendChild( $value );
+                $node->appendChild( $attr );
+            }
+        }
+
+        header("Content-Type: application/xml");
+        echo $dom->saveXML();
+
+
+
+    }
+
     public function index()
     {
         $q = urldecode($this->input->get('q', TRUE));
@@ -76,7 +159,9 @@ class Fruit extends CI_Controller
 	    'no_plat' => set_value('no_plat'),
 	    'afdeling' => set_value('afdeling'),
 	    'tgl_angkut' => set_value('tgl_angkut'),
-	    'tgl_bongkar' => set_value('tgl_bongkar'),
+        'tgl_bongkar' => set_value('tgl_bongkar'),
+        'tujuan' => set_value('tujuan'),
+	    'berat_bersih' => set_value('berat_bersih'),
 	);
         $this->load->view('v_index', $data);
     }
@@ -92,9 +177,10 @@ class Fruit extends CI_Controller
 		'id_user' => $this->input->post('id_user',TRUE),
 		'no_plat' => $this->input->post('no_plat',TRUE),
 		'afdeling' => $this->input->post('afdeling',TRUE),
-		'tgl_angkut' => $this->input->post('tgl_angkut',TRUE),
-		'tgl_bongkar' => $this->input->post('tgl_bongkar',TRUE),
-        'user_at' => $this->input->get('id_user')
+        'tgl_angkut' => $this->input->post('tgl_angkut',TRUE),
+		'tujuan' => $this->input->post('tujuan',TRUE),
+        'user_at' => $this->input->get('id_user'),
+        'status' => 'delivery'
 	    );
 
             $this->Fruit_model->insert($data);
@@ -118,7 +204,9 @@ class Fruit extends CI_Controller
 		'no_plat' => set_value('no_plat', $row->no_plat),
 		'afdeling' => set_value('afdeling', $row->afdeling),
 		'tgl_angkut' => set_value('tgl_angkut', $row->tgl_angkut),
-		'tgl_bongkar' => set_value('tgl_bongkar', $row->tgl_bongkar),
+        'tgl_bongkar' => set_value('tgl_bongkar', $row->tgl_bongkar),
+        'tujuan' => set_value('tujuan', $row->tujuan),
+		'berat_bersih' => set_value('berat_bersih', $row->berat_bersih),
 	    );
             $this->load->view('v_index', $data);
         } else {
@@ -139,7 +227,10 @@ class Fruit extends CI_Controller
 		'no_plat' => $this->input->post('no_plat',TRUE),
 		'afdeling' => $this->input->post('afdeling',TRUE),
 		'tgl_angkut' => $this->input->post('tgl_angkut',TRUE),
-		'tgl_bongkar' => $this->input->post('tgl_bongkar',TRUE),
+        'tgl_bongkar' => $this->input->post('tgl_bongkar',TRUE),
+        'tujuan' => $this->input->post('tujuan',TRUE),
+        'berat_bersih' => $this->input->post('berat_bersih',TRUE),
+		'status' => 'finish',
         'user_at' => $this->input->get('id_user')
 	    );
 
@@ -169,8 +260,6 @@ class Fruit extends CI_Controller
 	$this->form_validation->set_rules('no_plat', 'no plat', 'trim|required');
 	$this->form_validation->set_rules('afdeling', 'afdeling', 'trim|required');
 	$this->form_validation->set_rules('tgl_angkut', 'tgl angkut', 'trim|required');
-	$this->form_validation->set_rules('tgl_bongkar', 'tgl bongkar', 'trim|required');
-
 	$this->form_validation->set_rules('id_fruit', 'id_fruit', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');
     }
