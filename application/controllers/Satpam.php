@@ -85,7 +85,7 @@ class Satpam extends CI_Controller {
 		$this->db->join('jadwal_satpam_detail b', 'a.id_user = b.id_user', 'inner');
 		$this->db->join('jadwal_satpam c', 'c.id_jadwal = b.id_jadwal', 'inner');
 		$this->db->where('c.tanggal', date('Y-m-d'));
-		$this->db->where('a.id_level', '8');
+		$this->db->where('a.id_level', '14');
 		$user = $this->db->get();
 
 		$data = [];
@@ -143,7 +143,7 @@ class Satpam extends CI_Controller {
 		$this->db->from('log_lokasi a');
 		$this->db->join('users b', 'a.id_user = b.id_user', 'inner');
 		$this->db->where('a.id_user', $id_user);
-		$this->db->where('b.id_level', '8');
+		$this->db->where('b.id_level', '14');
 		$this->db->order_by('a.created_at', 'desc');
 		if ($all == '1') {
 			// code...
