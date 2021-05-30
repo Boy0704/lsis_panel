@@ -27,7 +27,7 @@
             <input type="datetime-local" class="form-control" name="tgl_angkut" id="tgl_angkut" placeholder="Tgl Angkut" value="<?php echo $tgl_angkut; ?>" />
         </div>
 	    <?php if (isset($_GET['id_level'])): ?>
-            <?php if ($_GET['id_level']): ?>
+            <?php if ($_GET['id_level'] == '15' and $this->uri->segment(2) == 'update'): ?>
                 <div class="form-group">
                     <label for="datetime">Tgl Bongkar </label>
                     <input type="datetime-local" class="form-control" name="tgl_bongkar" id="tgl_bongkar" placeholder="Tgl Bongkar" value="<?php echo $tgl_bongkar; ?>" />
