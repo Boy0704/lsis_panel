@@ -22,7 +22,12 @@
 				if ($this->session->userdata('level') != '' && $this->session->userdata('level') == 'admin') {
 					// code...
 				} else {
-					$this->db->where('user_at', $this->input->get('id_user'));
+					if ($level == '6' || $level == '9') {
+						// code...
+					} else {
+						$this->db->where('user_at', $this->input->get('id_user'));
+					}
+					
 				}
 				
 				$this->db->order_by('id_agree', 'desc');
