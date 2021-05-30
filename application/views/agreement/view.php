@@ -52,13 +52,13 @@
 						<?php 
 						if ($rw->status == 'final') {
 							?>
-							<a href="agreement/download/<?php echo $rw->id_agree ?>" class="label label-success">Download</a>
+							<a href="agreement/download/<?php echo $rw->id_agree.'?'.param_get() ?>" class="label label-success">Download</a>
 
 							<?php 
 							
 						} elseif ($rw->status == 'kurang') {
 							?>
-							<a href="agreement/upload_kurang/<?php echo $rw->id_agree ?>" class="label label-info">Lihat data yang kurang</a>
+							<a href="agreement/upload_kurang/<?php echo $rw->id_agree.'?'.param_get() ?>" class="label label-info">Lihat data yang kurang</a>
 
 							<?php
 						}
@@ -66,10 +66,19 @@
 						 ?>
 
 						<?php if ($rw->status == 'proses'): ?>
-							<a href="agreement/delete/<?php echo $rw->id_agree ?>" onclick="javasciprt: return confirm('Yakin akan hapus data ini ?')" class="label label-danger">Hapus</a>
+							<a href="agreement/delete/<?php echo $rw->id_agree.'?'.param_get() ?>" onclick="javasciprt: return confirm('Yakin akan hapus data ini ?')" class="label label-danger">Hapus</a>
 						<?php endif ?>
 
 						<?php if ($level == '6' || $level == '9'): ?>
+
+							<?php 
+							$this->db->where('id_agree', $rw->id_agree);
+							$cek_tambahan = $this->db->get('agree_kurang');
+							 ?>
+							<?php if ($cek_tambahan->num_rows() > 0): ?>
+								<a href="agreement/lihat_data_tambahan/<?php echo $rw->id_agree.'?'.param_get() ?>" class="label label-warning">Lihat data tambahan</a>
+							<?php endif ?>
+
 							<a href="agreement/upload_hasil/<?php echo $rw->id_agree.'?'.param_get() ?>" class="label label-info">Upload Hasil</a>
 							<a href="agreement/minta_perbaiki/<?php echo $rw->id_agree.'?'.param_get() ?>" class="label label-default">Minta Upload Ulang</a>
 						<?php endif ?>

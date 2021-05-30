@@ -82,6 +82,7 @@ class Agreement extends CI_Controller {
         $method = "1";
 
         $this->db->where('id_level', '6');
+        $this->db->or_where('id_level', '9');
         foreach ($this->db->get('users')->result() as $br) {
         	$this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $br->token);
         }
@@ -129,6 +130,87 @@ class Agreement extends CI_Controller {
 
 	}
 
+	public function upload_kurang($id)
+	{
+		if ($_POST) {
+			
+			$id_agree = $this->input->post('id_agree');
+			$data = [];
+   
+		      $count = count($_FILES['files']['name']);
+		    
+		      for($i=0;$i<$count;$i++){
+		    
+		        if(!empty($_FILES['files']['name'][$i])){
+
+		        	$nmfile = "tambahan_".time();
+		    
+		          $_FILES['file']['name'] = $_FILES['files']['name'][$i];
+		          $_FILES['file']['type'] = $_FILES['files']['type'][$i];
+		          $_FILES['file']['tmp_name'] = $_FILES['files']['tmp_name'][$i];
+		          $_FILES['file']['error'] = $_FILES['files']['error'][$i];
+		          $_FILES['file']['size'] = $_FILES['files']['size'][$i];
+		  
+		          $config['upload_path'] = 'files/agreement/'; 
+		          $config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
+		          $config['max_size'] = '10000';
+		          $config['file_name'] = $nmfile;
+		   
+		          $this->load->library('upload',$config); 
+		    
+		          if($this->upload->do_upload('file')){
+		            $uploadData = $this->upload->data();
+		            $filename = $uploadData['file_name'];
+		   
+		            $this->db->insert('agree_kurang', array(
+		            	'id_agree' => $id_agree,
+		            	'link' => $filename
+		            ));
+		          }
+		        }
+		   
+		      }
+
+		    $title = "Agreement Tambahan";
+	        $id = $id_user;
+	        $pesan = "file tambahan permohonan perjanjian sudah di upload";
+	        $method = "1";
+
+	        $this->db->where('id_level', '6');
+	        $this->db->or_where('id_level', '9');
+	        foreach ($this->db->get('users')->result() as $br) {
+	        	$this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $br->token);
+	        }
+
+			
+
+			?>
+			<script type="text/javascript">
+				WebAppInterface.showToast("Data berhasil disimpan !");
+				window.location="<?php echo base_url() ?>agreement?<?php echo param_get() ?>";
+			</script>
+			<?php
+
+		} else {
+			$data = array(
+				'id' => $id,
+				'konten' => 'agreement/upload_kurang',
+	            'judul_page' => 'Upload Agreement',
+			);
+			$this->load->view('v_index', $data);
+		}
+	}
+
+	public function lihat_data_tambahan($id)
+	{
+		$data = array(
+			'id' => $id,
+			'konten' => 'agreement/tambahan',
+            'judul_page' => 'Data yang kurang Agreement',
+		);
+		$this->load->view('v_index', $data);
+	}
+
 	public function upload_hasil($id)
 	{
 		$this->db->where('id_agree', $id);
@@ -166,15 +248,35 @@ class Agreement extends CI_Controller {
 
 	public function minta_perbaiki($id)
 	{
-		$this->db->where('id_agree', $id);
-		$this->db->update('agreement', array('status'=>'kurang'));
+		if ($_POST) {
 
-		?>
-		<script type="text/javascript">
-			WebAppInterface.showToast("Data berhasil dikirim !");
-			window.location="<?php echo base_url() ?>agreement?<?php echo param_get() ?>";
-		</script>
-		<?php
+
+			$this->db->where('id_agree', $id);
+			$this->db->update('agreement', array('status'=>'kurang','catatan_perbaikan' => $this->input->post('catatan_perbaikan')));
+
+			$title = "Agreement Perbaikan";
+	        $id = get_data('agreement','id_agree',$id,'user_at');
+	        $pesan = "Permohonan Perjanjian meminta perbaikan";
+	        $method = "1";
+	        $token = get_data('users','id_user',$id,'token');
+
+	        $this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $token);
+
+			?>
+			<script type="text/javascript">
+				WebAppInterface.showToast("Data berhasil dikirim !");
+				window.location="<?php echo base_url() ?>agreement?<?php echo param_get() ?>";
+			</script>
+			<?php
+		} else {
+			$data = array(
+				'konten' => 'agreement/minta_perbaiki',
+	            'judul_page' => 'Upload Ulang Agreement',
+			);
+
+			$this->load->view('v_index', $data);
+		}
+		
 
 	}
 
