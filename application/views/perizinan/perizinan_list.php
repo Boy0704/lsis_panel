@@ -1,7 +1,12 @@
 
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
-                <?php echo anchor(site_url('perizinan/create').'?'.param_get(),'Tambah', 'class="btn btn-primary"'); ?>
+                <?php if (isset($_GET['id_level'])): ?>
+                    <?php if ($_GET['id_level'] == '5' || $_GET['id_level'] == '6' || $_GET['id_level'] == '8' || $_GET['id_level'] == '9' ): ?>
+                        <?php echo anchor(site_url('perizinan/create').'?'.param_get(),'Tambah', 'class="btn btn-primary"'); ?>
+                    <?php endif ?>
+                <?php endif ?>
+                
             </div>
             <div class="col-md-4 text-center">
                 <div style="margin-top: 8px" id="message">
@@ -62,11 +67,15 @@
 			<td><?php echo $perizinan->dari ?></td>
 			<td><?php echo $perizinan->sampai ?></td>
 			<td style="text-align:center" width="200px">
-				<?php 
-				echo anchor(site_url('perizinan/update/'.$perizinan->id_perizinan).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
-				echo ' | '; 
-				echo anchor(site_url('perizinan/delete/'.$perizinan->id_perizinan).'?'.param_get(),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
-				?>
+                <?php if (isset($_GET['id_level'])): ?>
+                    <?php if ($_GET['id_level'] == '5' || $_GET['id_level'] == '6' || $_GET['id_level'] == '8' || $_GET['id_level'] == '9' ): ?>
+            				<?php 
+            				echo anchor(site_url('perizinan/update/'.$perizinan->id_perizinan).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
+            				echo ' | '; 
+            				echo anchor(site_url('perizinan/delete/'.$perizinan->id_perizinan).'?'.param_get(),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"'); 
+            				?>
+                    <?php endif ?>
+                <?php endif ?>
 			</td>
 		</tr>
                 <?php

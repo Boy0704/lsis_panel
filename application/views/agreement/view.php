@@ -19,7 +19,12 @@
 				$no = 1;
 				$id_user = $this->input->get('id_user');
 				$level = get_data('users','id_user',$id_user,'id_level');
-				// $this->db->where('id_user', $this->input->get('id_user'));
+				if ($this->session->userdata('level') != '' && $this->session->userdata('level') == 'admin') {
+					// code...
+				} else {
+					$this->db->where('id_user', $this->input->get('id_user'));
+				}
+				
 				$this->db->order_by('id_agree', 'desc');
 				foreach ($this->db->get('agreement')->result() as $rw): ?>
 				
@@ -48,7 +53,7 @@
 							
 						} elseif ($rw->status == 'kurang') {
 							?>
-							<a href="agreement/edit/<?php echo $rw->id_agree ?>" class="label label-info">Edit</a>
+							<a href="agreement/upload_kurang/<?php echo $rw->id_agree ?>" class="label label-info">Lihat data yang kurang</a>
 
 							<?php
 						}
@@ -59,7 +64,7 @@
 							<a href="agreement/delete/<?php echo $rw->id_agree ?>" onclick="javasciprt: return confirm('Yakin akan hapus data ini ?')" class="label label-danger">Hapus</a>
 						<?php endif ?>
 
-						<?php if ($level == '6'): ?>
+						<?php if ($level == '6' || $level == '9'): ?>
 							<a href="agreement/upload_hasil/<?php echo $rw->id_agree.'?'.param_get() ?>" class="label label-info">Upload Hasil</a>
 							<a href="agreement/minta_perbaiki/<?php echo $rw->id_agree.'?'.param_get() ?>" class="label label-default">Minta Upload Ulang</a>
 						<?php endif ?>
