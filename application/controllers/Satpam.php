@@ -22,18 +22,20 @@ class Satpam extends CI_Controller {
 		$this->db->where('id_user', $id_user);
 		$this->db->order_by('created_at', 'desc');
 		$this->db->limit(1);
-		$br = $this->db->get('log_lokasi')->row();
-		if ($br->num_rows() == 0) {
+		$cek = $this->db->get('log_lokasi')
+        if ($cek->num_rows() == 0) {
             ?>
             <script type="text/javascript">
                 WebAppInterface.showToast("Lokasi tidak terdeteksi !");
             </script>
             <?php
             exit();
-        }
-		$data['latitude']= $br->latitude;
-		$data['longitude']= $br->longitude;
-		$this->load->view('satpam/cek_posisi',$data);
+        } else {
+            $br = $cek->row();
+			$data['latitude']= $br->latitude;
+			$data['longitude']= $br->longitude;
+			$this->load->view('satpam/cek_posisi',$data);
+		}
 	}
 
 	public function cek_lokasi($id)
