@@ -172,7 +172,7 @@ class Agreement extends CI_Controller {
 		      }
 
 		    $title = "Agreement Tambahan";
-	        $id = $id_user;
+	        $id = '';
 	        $pesan = "file tambahan permohonan perjanjian sudah di upload";
 	        $method = "1";
 
