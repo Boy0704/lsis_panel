@@ -68,9 +68,9 @@
                  ?>         
             </td>
 			<td style="text-align:center" width="200px">
-                <a href="fruit/cek_posisi/<?php echo $rw->id_user ?>" class="label label-info">Cek Posisi</a>
-                <a href="fruit/history/<?php echo $rw->id_user.'?mobile=1' ?>" class="label label-warning">History</a>
-                <a href="fruit/download/<?php echo $rw->id_user.'?mobile=1' ?>" class="label label-success">Download History</a>
+                <a href="fruit/cek_posisi/<?php echo $fruit->id_user ?>" class="label label-info">Cek Posisi</a>
+                <a href="fruit/history/<?php echo $fruit->id_user.'?mobile=1' ?>" class="label label-warning">History</a>
+                <a href="fruit/download/<?php echo $fruit->id_user.'?mobile=1' ?>" class="label label-success">Download History</a>
 				<?php 
 				if (isset($_GET['id_level'])) {
                     if ($_GET['id_level'] == '15') {
