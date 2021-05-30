@@ -90,6 +90,8 @@ class Users extends CI_Controller
     {
         $this->_rules();
 
+        $img = upload_gambar_biasa('user', 'image/user/', 'jpg|png|jpeg', 10000, 'foto')
+
         if ($this->form_validation->run() == FALSE) {
             $this->create();
         } else {
@@ -100,7 +102,7 @@ class Users extends CI_Controller
 		'password' => $this->input->post('password',TRUE),
         'id_level' => $this->input->post('id_level',TRUE),
 		'jabatan' => $this->input->post('jabatan',TRUE),
-		'foto' => $foto = $img = upload_gambar_biasa('user', 'image/user/', 'jpg|png|jpeg', 10000, 'foto'),
+		'foto' => $retVal = ($_FILES['foto']['name'] == '') ? '' : $img,
 		'token' => $this->input->post('token',TRUE),
 	    );
 
