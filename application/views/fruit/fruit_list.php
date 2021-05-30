@@ -53,7 +53,7 @@
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('fruit/update/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
-                if (isset($this->input->get('id_level'))) {
+                if (isset($_GET['id_level'])) {
                     if ($this->input->get('id_level') != '8' OR $this->input->get('id_level') != '9') {
                         echo ' | '; 
                         echo anchor(site_url('fruit/delete/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
