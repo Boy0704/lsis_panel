@@ -5,7 +5,7 @@
             <!-- <input type="text" class="form-control" name="id_user" id="id_user" placeholder="Id User" value="<?php echo $id_user; ?>" /> -->
             <select name="id_user" class="form-control">
                 <option value="<?php echo $id_user ?>"><?php echo get_data('users','id_user',$id_user,'nama') ?></option>
-                <?php foreach ($this->db->get_where('users', array('id_level'=>'9'))->result() as $rw): ?>
+                <?php foreach ($this->db->get_where('users', array('id_level'=>'15'))->result() as $rw): ?>
                     <option value="<?php echo $rw->id_user ?>"><?php echo $rw->nama ?></option>i
                 <?php endforeach ?>
             </select>
