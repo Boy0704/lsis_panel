@@ -32,7 +32,7 @@
 	    <div class="form-group">
             <label for="varchar">Foto </label>
             <input type="hidden" name="foto_old" value="<?php echo $foto ?>">
-            <input type="file" class="form-control" name="foto" id="foto" placeholder="Foto" <?php echo ($this->uri->segment(2) == 'create') ? 'required' : '' ?>/>
+            <input type="file" class="form-control" name="foto" id="foto" placeholder="Foto" <?php //echo ($this->uri->segment(2) == 'create') ? 'required' : '' ?>/>
         </div>
 	    <input type="hidden" name="id_user" value="<?php echo $id_user; ?>" /> 
 	    <button type="submit" class="btn btn-primary"><?php echo $button ?></button> 
