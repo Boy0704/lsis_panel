@@ -17,7 +17,7 @@ class Fruit extends CI_Controller
         $this->db->where('id_user', $id_user);
         $this->db->order_by('created_at', 'desc');
         $this->db->limit(1);
-        $cek = $this->db->get('log_lokasi')
+        $cek = $this->db->get('log_lokasi');
         if ($cek->num_rows() == 0) {
             ?>
             <script type="text/javascript">
