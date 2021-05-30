@@ -18,6 +18,14 @@ class Fruit extends CI_Controller
         $this->db->order_by('created_at', 'desc');
         $this->db->limit(1);
         $br = $this->db->get('log_lokasi')->row();
+        if ($br->num_rows() == 0) {
+            ?>
+            <script type="text/javascript">
+                WebAppInterface.showToast("Lokasi tidak terdeteksi !");
+            </script>
+            <?php
+            exit();
+        }
         $data['latitude']= $br->latitude;
         $data['longitude']= $br->longitude;
         $this->load->view('fruit/cek_posisi',$data);
