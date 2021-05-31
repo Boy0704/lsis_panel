@@ -39,6 +39,14 @@ class Api extends REST_Controller {
         $user = $this->db->get('users');
         if ($user->num_rows() > 0) {
             $users = $user->row(); 
+
+            $this->db->where('token', $decoded_data->token);
+            $cek_token = $this->db->get('users');
+            if ($cek_token->num_rows() > 0) {
+                $this->db->where('token', $decoded_data->token);
+                $this->db->update('users', array('token' => ''));
+            }
+
             $this->db->where('id_user', $users->id_user);
             $this->db->update('users', array('token'=>$decoded_data->token));
             $condition = array(
