@@ -207,6 +207,7 @@ class Api extends REST_Controller {
                 'pertanyaan' => $rw->pertanyaan,
                 'id_user'=> $rw->id_user,
                 'nama_penanya' => get_data('users','id_user',$rw->id_user,'nama'),
+                'jabatan' => get_data('users','id_user',$rw->id_user,'jabatan'),
                 'foto' => get_data('users','id_user',$rw->id_user,'foto'),
                 'waktu' => time_since($rw->created_at)
 
@@ -231,6 +232,7 @@ class Api extends REST_Controller {
                 'pertanyaan' => substr($rw->pertanyaan, 0, 150)."..",
                 'id_user'=> $rw->id_user,
                 'nama_penanya' => get_data('users','id_user',$rw->id_user,'nama'),
+                'jabatan' => get_data('users','id_user',$rw->id_user,'jabatan'),
                 'foto' => get_data('users','id_user',$rw->id_user,'foto'),
                 'waktu' => time_since($rw->created_at)
 
@@ -263,6 +265,7 @@ class Api extends REST_Controller {
                 'jawaban' => $rw->jawaban,
                 'id_user'=> $rw->id_user,
                 'nama_penjawab' => get_data('users','id_user',$rw->id_user,'nama'),
+                'jabatan' => get_data('users','id_user',$rw->id_user,'jabatan'),
                 'foto' => get_data('users','id_user',$rw->id_user,'foto'),
                 'waktu' => time_since($rw->created_at)
 
