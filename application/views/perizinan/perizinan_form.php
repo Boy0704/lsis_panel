@@ -1,5 +1,5 @@
 
-        <form action="<?php echo $action; ?>" method="post">
+        <form action="<?php echo $action.'?'.param_get(); ?>" method="post">
 	    <div class="form-group">
             <label for="varchar">Unit Kerja <?php echo form_error('unit_kerja') ?></label>
             <input type="text" class="form-control" name="unit_kerja" id="unit_kerja" placeholder="Unit Kerja" value="<?php echo $unit_kerja; ?>" />
