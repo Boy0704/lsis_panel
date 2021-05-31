@@ -172,7 +172,10 @@ class Fruit extends CI_Controller
 	    'tgl_angkut' => set_value('tgl_angkut'),
         'tgl_bongkar' => set_value('tgl_bongkar'),
         'tujuan' => set_value('tujuan'),
-	    'berat_bersih' => set_value('berat_bersih'),
+        'jumlah_tros' => set_value('jumlah_tros'),
+        'berat_berondolan' => set_value('berat_berondolan'),
+        'berat_bersih_berondolan' => set_value('berat_bersih_berondolan'),
+	    'berat_bersih_tros' => set_value('berat_bersih_tros'),
 	);
         $this->load->view('v_index', $data);
     }
@@ -189,7 +192,11 @@ class Fruit extends CI_Controller
 		'no_plat' => $this->input->post('no_plat',TRUE),
 		'afdeling' => $this->input->post('afdeling',TRUE),
         'tgl_angkut' => $this->input->post('tgl_angkut',TRUE),
-		'tujuan' => $this->input->post('tujuan',TRUE),
+        'tujuan' => $this->input->post('tujuan',TRUE),
+        'jumlah_tros' => $this->input->post('jumlah_tros',TRUE),
+        'berat_berondolan' => $this->input->post('berat_berondolan',TRUE),
+        'berat_bersih_tros' => $this->input->post('berat_bersih_tros',TRUE),
+		'berat_bersih_berondolan' => $this->input->post('berat_bersih_berondolan',TRUE),
         'user_at' => $this->input->get('id_user'),
         'status' => 'delivery'
 	    );
@@ -217,7 +224,10 @@ class Fruit extends CI_Controller
 		'tgl_angkut' => set_value('tgl_angkut', $row->tgl_angkut),
         'tgl_bongkar' => set_value('tgl_bongkar', $row->tgl_bongkar),
         'tujuan' => set_value('tujuan', $row->tujuan),
-		'berat_bersih' => set_value('berat_bersih', $row->berat_bersih),
+        'jumlah_tros' => set_value('jumlah_tros', $row->jumlah_tros),
+        'berat_berondolan' => set_value('berat_berondolan', $row->berat_berondolan),
+        'berat_bersih_tros' => set_value('berat_bersih_tros', $row->berat_bersih_tros),
+        'berat_bersih_berondolan' => set_value('berat_bersih_berondolan', $row->berat_bersih_berondolan),
 	    );
             $this->load->view('v_index', $data);
         } else {
@@ -228,6 +238,7 @@ class Fruit extends CI_Controller
     
     public function update_action() 
     {
+        log_r($_POST);
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
@@ -240,7 +251,10 @@ class Fruit extends CI_Controller
 		'tgl_angkut' => $this->input->post('tgl_angkut',TRUE),
         'tgl_bongkar' => $this->input->post('tgl_bongkar',TRUE),
         'tujuan' => $this->input->post('tujuan',TRUE),
-        'berat_bersih' => $this->input->post('berat_bersih',TRUE),
+        'jumlah_tros' => $this->input->post('jumlah_tros',TRUE),
+        'berat_berondolan' => $this->input->post('berat_berondolan',TRUE),
+        'berat_bersih_tros' => $this->input->post('berat_bersih_tros',TRUE),
+        'berat_bersih_berondolan' => $this->input->post('berat_bersih_berondolan',TRUE),
 		'status' => 'finish',
         'user_at' => $this->input->get('id_user')
 	    );

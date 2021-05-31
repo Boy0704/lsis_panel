@@ -19,12 +19,25 @@
             <textarea class="form-control" rows="3" name="afdeling" id="afdeling" placeholder="Afdeling"><?php echo $afdeling; ?></textarea>
         </div>
         <div class="form-group">
+            <label for="varchar">Jumlah Tros</label>
+            <input type="text" class="form-control" name="jumlah_tros" id="jumlah_tros" placeholder="No Plat" value="<?php echo $jumlah_tros; ?>" required/>
+        </div>
+        <div class="form-group">
+            <label for="varchar">Berat berondolan (Jika ada)</label>
+            <input type="text" class="form-control" name="berat_berondolan" id="berat_berondolan" placeholder="No Plat" value="<?php echo $berat_berondolan; ?>" />
+        </div>
+        <div class="form-group">
             <label for="tujuan">Tujuan </label>
             <textarea class="form-control" rows="3" name="tujuan" id="tujuan" placeholder="Tujuan" required><?php echo $tujuan; ?></textarea>
         </div>
 	    <div class="form-group">
             <label for="datetime">Tgl Angkut <?php echo form_error('tgl_angkut') ?></label>
-            <input type="datetime-local" class="form-control" name="tgl_angkut" id="tgl_angkut" placeholder="Tgl Angkut" value="<?php echo $tgl_angkut; ?>" />
+            <?php if ($this->uri->segment(2) == 'update'): ?>
+                <input type="text" class="form-control" name="tgl_angkut" id="tgl_angkut" placeholder="Tgl Angkut" value="<?php echo $tgl_angkut; ?>" />
+            <?php else: ?>
+                <input type="datetime-local" class="form-control" name="tgl_angkut" id="tgl_angkut" placeholder="Tgl Angkut" value="<?php echo $tgl_angkut; ?>" />
+            <?php endif ?>
+            
         </div>
 	    <?php if (isset($_GET['id_level'])): ?>
             <?php if ($_GET['id_level'] == '15' and $this->uri->segment(2) == 'update'): ?>
@@ -34,8 +47,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="varchar">Berat Bersih </label>
-                    <input type="text" class="form-control" name="berat_bersih" id="berat_bersih" placeholder="Berat bersih" value="<?php echo $berat_bersih; ?>" required/>
+                    <label for="varchar">Berat bersih berondolan</label>
+                    <input type="text" class="form-control" name="berat_bersih_berondolan" id="berat_bersih_berondolan" placeholder="No Plat" value="<?php echo $berat_bersih_berondolan; ?>" required/>
+                </div>
+                <div class="form-group">
+                    <label for="varchar">Berat bersih tros</label>
+                    <input type="text" class="form-control" name="berat_bersih_tros" id="berat_bersih_tros" placeholder="No Plat" value="<?php echo $berat_bersih_tros; ?>" />
                 </div>
             <?php endif ?>
         <?php endif ?>

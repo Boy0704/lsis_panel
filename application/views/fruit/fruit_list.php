@@ -73,12 +73,12 @@
                 <a href="fruit/download/<?php echo $fruit->id_user.'?mobile=1' ?>" class="label label-success">Download History</a>
 				<?php 
 				if (isset($_GET['id_level'])) {
-                    if ($_GET['id_level'] == '15') {
+                    if ($fruit->status != 'final' && $_GET['id_level'] == '15') {
                         echo anchor(site_url('fruit/update/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
                     }
                 }
                 if (isset($_GET['id_level'])) {
-                    if ($this->input->get('id_level') != '7' OR $this->input->get('id_level') != '14') {
+                    if ( $fruit->status != 'final' && ($this->input->get('id_level') != '7' OR $this->input->get('id_level') != '14') ) {
                         echo ' | '; 
                         echo anchor(site_url('fruit/delete/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
                     }
