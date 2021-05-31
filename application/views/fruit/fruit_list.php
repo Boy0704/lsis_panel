@@ -87,7 +87,7 @@
                     }
                 }
                 if (isset($_GET['id_level'])) {
-                    if ($fruit->status != 'final') {
+                    if ($fruit->status != 'finish') {
                         if ( $this->input->get('id_level') != '7' OR $this->input->get('id_level') != '14' ) {
                         echo ' | '; 
                         echo anchor(site_url('fruit/delete/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
