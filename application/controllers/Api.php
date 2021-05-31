@@ -178,7 +178,7 @@ class Api extends REST_Controller {
             $method = "1";
 
             $this->db->select('token');
-            // $this->db->where('id_user!=', $decoded_data->id_user);
+            $this->db->where('id_user!=', $decoded_data->id_user);
             $users = $this->db->get('users');
             foreach ($users->result() as $rw) {
                 $this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $rw->token);
