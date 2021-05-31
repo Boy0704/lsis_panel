@@ -31,7 +31,7 @@
 		$("#jadwal_satpam").click(function(event) {
 			event.preventDefault();
 			<?php 
-			if ($this->input->get('id_level') == '14') {
+			if ($this->input->get('id_level') == '14' || $this->input->get('id_level') == '4') {
 			 ?>
 			 WebAppInterface.showToast("kamu tidak memiliki akses ke sini !");
 			<?php } else { ?>
