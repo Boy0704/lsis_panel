@@ -47,7 +47,16 @@
 		<th>Status</th>
 		<th>Action</th>
             </tr><?php
-            foreach ($fruit_data as $fruit)
+            $start = 1;
+            if ($this->session->userdata('level')== 'admin') {
+                // code...
+            } else {
+                if ($this->input->get('id_level') == '15') {
+                    $this->db->where('id_user', $this->input->get('id_user'));
+                }
+            }
+            $fruit_data = $this->db->get('fruit');
+            foreach ($fruit_data->result() as $fruit)
             {
                 ?>
                 <tr>
