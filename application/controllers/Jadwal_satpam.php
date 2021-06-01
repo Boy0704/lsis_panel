@@ -141,7 +141,7 @@ class Jadwal_satpam extends CI_Controller
         if ($row) {
             $this->Jadwal_satpam_model->delete($id);
             $this->session->set_flashdata('message', 'Delete Record Success');
-            redirect(site_url('jadwal_satpam'));
+            redirect(site_url('jadwal_satpam').'?'.param_get());
         } else {
             $this->session->set_flashdata('message', 'Record Not Found');
             redirect(site_url('jadwal_satpam').'?'.param_get());
