@@ -36,7 +36,7 @@
 
         // your first call to get & process inital data
 
-        downloadUrl("<?php echo base_url() ?>fruit/lokasi_supir/<?php echo $this->uri->segment(3) ?>", processXML);
+        downloadUrl("<?php echo base_url() ?>fruit/lokasi_terupdate/<?php echo $this->uri->segment(3) ?>", processXML);
     }
 
     function processXML(data) {
@@ -75,8 +75,8 @@
             // set timeout after you finished processing & displaying the first lot of markers. Rember that requests on the server can take some time to complete. SO you want to make another one
             // only when the first one is completed.
             setTimeout(function() {
-                downloadUrl("<?php echo base_url() ?>fruit/lokasi_fruit/<?php echo $this->uri->segment(3) ?>", processXML);
-            }, 5000);
+                downloadUrl("<?php echo base_url() ?>fruit/lokasi_terupdate/<?php echo $this->uri->segment(3) ?>", processXML);
+            }, 1000);
     }
 
 //clear existing markers from the map

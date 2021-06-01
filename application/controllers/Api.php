@@ -376,6 +376,13 @@ class Api extends REST_Controller {
         $decoded_data = json_decode($data);
 
         $this->db->where('id_user', $decoded_data->id_user);
+        $this->db->update('users', array(
+            'latitude' => $decoded_data->latitude,
+            'longitude' => $decoded_data->longitude,
+            'date_lokasi' => get_waktu()
+        ));
+
+        $this->db->where('id_user', $decoded_data->id_user);
         $this->db->where('latitude', $decoded_data->latitude);
         $this->db->where('longitude', $decoded_data->longitude);
         $this->db->like('created_at', date('Y-m-d'), 'AFTER');

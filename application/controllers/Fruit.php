@@ -60,6 +60,40 @@ class Fruit extends CI_Controller
         $this->load->view('fruit/download');
     }
 
+    public function lokasi_terupdate($id_user)
+    {
+        $data = $this->db->query("SELECT id_user, nama, latitude, longitude, date_lokasi as created_at FROM users WHERE id_user='$id_user' ");
+        $attribs=array('id_user','nama','latitude','longitude','created_at');
+
+
+        $dom=new DOMDocument('1.0','utf-8');
+        $dom->formatOutput=true;
+        $dom->standalone=true;
+        $dom->recover=true;
+
+        $root=$dom->createElement('markers');
+        $dom->appendChild( $root );
+
+
+        foreach ($data->result() as $rs) {
+            $node=$dom->createElement('marker');
+            $root->appendChild( $node );
+
+            foreach( $attribs as $attrib ){
+                $attr = $dom->createAttribute( $attrib );
+                $value= $dom->createTextNode( $rs->$attrib );
+                $attr->appendChild( $value );
+                $node->appendChild( $attr );
+            }
+        }
+
+        header("Content-Type: application/xml");
+        echo $dom->saveXML();
+
+
+
+    }
+
     public function lokasi_supir($id_user,$all='0')
     {
         $this->db->select('a.id_user,b.nama,a.latitude,a.longitude,a.created_at');
