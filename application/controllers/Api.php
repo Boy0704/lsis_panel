@@ -377,7 +377,7 @@ class Api extends REST_Controller {
 
         $this->db->where('id_user', $decoded_data->id_user);
         $this->db->where('latitude', $decoded_data->latitude);
-        // $this->db->where('longitude', $decoded_data->longitude);
+        $this->db->where('longitude', $decoded_data->longitude);
         $this->db->like('created_at', date('Y-m-d'), 'AFTER');
         $cek = $this->db->get('log_lokasi');
         if ($cek->num_rows() > 0) {
