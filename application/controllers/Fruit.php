@@ -272,7 +272,6 @@ class Fruit extends CI_Controller
     
     public function update_action() 
     {
-        log_r($_POST);
         $this->_rules();
 
         if ($this->form_validation->run() == FALSE) {
