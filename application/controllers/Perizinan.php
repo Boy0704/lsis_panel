@@ -39,7 +39,7 @@ class Perizinan extends CI_Controller
             'pagination' => $this->pagination->create_links(),
             'total_rows' => $config['total_rows'],
             'start' => $start,
-            'judul_page' => 'perizinan/perizinan_list',
+            'judul_page' => 'Daftar Perizinan',
             'konten' => 'perizinan/perizinan_list',
         );
         $this->load->view('v_index', $data);

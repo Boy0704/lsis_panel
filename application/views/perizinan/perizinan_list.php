@@ -16,26 +16,12 @@
             <div class="col-md-1 text-right">
             </div>
             <div class="col-md-3 text-right">
-                <form action="<?php echo site_url('perizinan/index'); ?>" class="form-inline" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
-                        <span class="input-group-btn">
-                            <?php 
-                                if ($q <> '')
-                                {
-                                    ?>
-                                    <a href="<?php echo site_url('perizinan'); ?>" class="btn btn-default">Reset</a>
-                                    <?php
-                                }
-                            ?>
-                          <button class="btn btn-primary" type="submit">Search</button>
-                        </span>
-                    </div>
-                </form>
+                
             </div>
         </div>
         <div class="table-responsive">
-        <table class="table table-bordered" style="margin-bottom: 10px">
+        <table class="table table-bordered" style="margin-bottom: 10px" id="example1">
+            <thead>
             <tr>
                 <th>No</th>
 		<th>Unit Kerja</th>
@@ -45,8 +31,13 @@
 		<th>Dari</th>
 		<th>Sampai</th>
 		<th>Action</th>
-            </tr><?php
+            </tr>
+            </thead>
+            <?php
+            $start = 1;
             $warna = "";
+            $this->db->order_by('id_perizinan', 'desc');
+            $perizinan_data = $this->db->get('perizinan')->result();
             foreach ($perizinan_data as $perizinan)
             {
                 if (strtotime($perizinan->sampai) > strtotime('Y-m-d')) {
@@ -87,7 +78,7 @@
 
                 ?>
                 <tr <?php echo $warna ?>>
-			<td width="80px"><?php echo ++$start ?></td>
+			<td width="80px"><?php echo $start ?></td>
 			<td><?php echo $perizinan->unit_kerja ?></td>
 			<td><?php echo $perizinan->jenis ?></td>
 			<td><?php echo $perizinan->nomor ?></td>
@@ -107,17 +98,10 @@
 			</td>
 		</tr>
                 <?php
+                $start++;
             }
             ?>
         </table>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <a class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
-		<?php echo anchor(site_url('perizinan/excel'), 'Download Excel', 'class="btn btn-primary"'); ?>
-	    </div>
-            <div class="col-md-6 text-right">
-                <?php echo $pagination ?>
-            </div>
-        </div>
+       
     

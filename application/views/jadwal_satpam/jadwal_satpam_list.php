@@ -11,37 +11,27 @@
             <div class="col-md-1 text-right">
             </div>
             <div class="col-md-3 text-right">
-                <form action="<?php echo site_url('jadwal_satpam/index'); ?>" class="form-inline" method="get">
-                    <div class="input-group">
-                        <input type="text" class="form-control" name="q" value="<?php echo $q; ?>">
-                        <span class="input-group-btn">
-                            <?php 
-                                if ($q <> '')
-                                {
-                                    ?>
-                                    <a href="<?php echo site_url('jadwal_satpam'); ?>" class="btn btn-default">Reset</a>
-                                    <?php
-                                }
-                            ?>
-                          <button class="btn btn-primary" type="submit">Search</button>
-                        </span>
-                    </div>
-                </form>
+                
             </div>
         </div>
         <div class="table-responsive">
-        <table class="table table-bordered" style="margin-bottom: 10px">
+        <table class="table table-bordered" style="margin-bottom: 10px" id="example1">
+            <thead>
             <tr>
                 <th>No</th>
 		<th>Lokasi</th>
 		<th>Tanggal</th>
 		<th>Action</th>
-            </tr><?php
+            </tr>
+            </thead><?php
+            $start = 1;
+            $this->db->order_by('id_jadwal', 'desc');
+            $jadwal_satpam_data = $this->db->get('jadwal_satpam')->result();
             foreach ($jadwal_satpam_data as $jadwal_satpam)
             {
                 ?>
                 <tr>
-			<td width="80px"><?php echo ++$start ?></td>
+			<td width="80px"><?php echo $start ?></td>
 			<td><?php echo $jadwal_satpam->lokasi ?></td>
 			<td><?php echo $jadwal_satpam->tanggal ?></td>
 			<td style="text-align:center" width="200px">
@@ -54,16 +44,10 @@
 			</td>
 		</tr>
                 <?php
+                $start++;
             }
             ?>
         </table>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <a class="btn btn-primary">Total Record : <?php echo $total_rows ?></a>
-	    </div>
-            <div class="col-md-6 text-right">
-                <?php echo $pagination ?>
-            </div>
-        </div>
+        
     

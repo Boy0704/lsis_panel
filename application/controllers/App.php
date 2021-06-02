@@ -6,7 +6,7 @@ class App extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
-        
+        $this->load->model('Notif_model');
     }
 
     public function form_agreement()
@@ -57,6 +57,7 @@ class App extends CI_Controller {
 
     public function cek_perizinan()
     {
+        $this->db->where('notif', 't');
         $perizinan = $this->db->get('perizinan');
         if ($perizinan->num_rows() > 0) {
             foreach ($perizinan->result() as $rw) {
@@ -89,6 +90,8 @@ class App extends CI_Controller {
                         foreach ($this->db->get('users')->result() as $br) {
                             $this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $br->token);
                         }
+                        $this->db->where('id_perizinan', $rw->id_perizinan);
+                        $this->db->update('perizinan', array('notif'=>'y'));
 
 
                     } 
@@ -122,6 +125,8 @@ class App extends CI_Controller {
                             foreach ($this->db->get('users')->result() as $br) {
                                 $this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $br->token);
                             }
+                            $this->db->where('id_perizinan', $rw->id_perizinan);
+                            $this->db->update('perizinan', array('notif'=>'y'));
                         } 
                     }
                     
@@ -147,6 +152,8 @@ class App extends CI_Controller {
                         foreach ($this->db->get('users')->result() as $br) {
                             $this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $br->token);
                         }
+                        $this->db->where('id_perizinan', $rw->id_perizinan);
+                        $this->db->update('perizinan', array('notif'=>'y'));
                     }
 
                 }
