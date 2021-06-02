@@ -15,7 +15,28 @@ class Lupa_password extends CI_Controller {
 
 		$this->db->where('email', $email);
 		$cek = $this->db->get('users');
-		if ($cek->num_rows() == 1) {
+		if ($cek->num_rows() > 0) {
+
+			$content = "<p>Silahkan login dengan password berikut.</p>
+						<br>
+						<center><h4>$cek->row()->password</h4></center>";
+
+			require APPPATH . '/libraries/class.phpmailer.php';
+			$mail = new PHPMailer;
+			$mail->IsSMTP();
+			$mail->SMTPSecure = 'ssl';
+			$mail->Host = 'mail.lsisptpn3.com'; //host masing2 provider email
+			$mail->SMTPDebug = 0;
+			$mail->Port = '465';
+			$mail->SMTPAuth = true;
+			$mail->Username = 'admin@lsisptpn3.com'; //user email
+			$mail->Password = '123456'; //password email 
+			$mail->SetFrom('admin@lsisptpn3.com', 'LSIS APPS'); //set email pengirim
+			$mail->Subject = "Permintaan Resend Password"; //subyek email
+			$mail->AddAddress($email, "User");  //tujuan email
+			$mail->MsgHTML($content); //pesan dapat berupa html
+			return $mail->Send();
+
 			?>
 			<script type="text/javascript">
 				WebAppInterface.showToast("Password sudah dikirim ke email anda !");
