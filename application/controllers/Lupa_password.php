@@ -21,7 +21,7 @@ class Lupa_password extends CI_Controller {
 
 			$content = "<p>Silahkan login dengan password berikut.</p>
 						<br>
-						<center><h4></h4></center>";
+						<center><h4>$password</h4></center>";
 
 			require APPPATH . '/libraries/class.phpmailer.php';
 			$mail = new PHPMailer;
@@ -37,7 +37,7 @@ class Lupa_password extends CI_Controller {
 			$mail->Subject = "Permintaan Resend Password"; //subyek email
 			$mail->AddAddress($email, "User");  //tujuan email
 			$mail->MsgHTML($content); //pesan dapat berupa html
-			return $mail->Send();
+			$mail->Send();
 
 			?>
 			<script type="text/javascript">
