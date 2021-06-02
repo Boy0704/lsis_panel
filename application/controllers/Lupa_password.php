@@ -17,9 +17,11 @@ class Lupa_password extends CI_Controller {
 		$cek = $this->db->get('users');
 		if ($cek->num_rows() > 0) {
 
+			$password = $cek->row()->password;
+
 			$content = "<p>Silahkan login dengan password berikut.</p>
 						<br>
-						<center><h4>$cek->row()->password</h4></center>";
+						<center><h4></h4></center>";
 
 			require APPPATH . '/libraries/class.phpmailer.php';
 			$mail = new PHPMailer;
