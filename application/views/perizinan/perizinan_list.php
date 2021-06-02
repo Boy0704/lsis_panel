@@ -49,13 +49,41 @@
             $warna = "";
             foreach ($perizinan_data as $perizinan)
             {
-                if (strtotime($perizinan->sampai) < strtotime(date('Y-m-d'))) {
-                    $warna = 'class="alert alert-danger"';
-                } elseif (strtotime($perizinan->sampai) > strtotime(date('Y-m-d'))) {
+                if (strtotime($perizinan->sampai) > strtotime('Y-m-d')) {
                     $warna = 'class="alert alert-success"';
-                } elseif (substr($perizinan->sampai, 0,9) == date('Y-m-d')) {
-                    $warna = 'class="alert alert-warning"';
+
+                    if ($perizinan->jenis == 'HGU' || $perizinan->jenis == 'HGB') {
+                        $tanggal = "$perizinan->sampai 00:59:59";
+                        $tanggal = new DateTime($tanggal); 
+
+                        $sekarang = new DateTime();
+
+                        $perbedaan = $tanggal->diff($sekarang);
+                        if ($perbedaan->y <= 2) {
+                            $warna = 'style="background:yellow"';
+                        }  
+                    } else {
+                        
+                        $tanggal = "$perizinan->sampai 00:59:59";
+                        $tanggal = new DateTime($tanggal); 
+
+                        $sekarang = new DateTime();
+
+                        $perbedaan = $tanggal->diff($sekarang);
+                        if ($perbedaan->y == 0) {
+                            if ($perbedaan->m <= 6) {
+                                $warna = 'style="background:yellow"';
+                            } 
+                        }
+
+                    }
                 }
+
+                if (strtotime($perizinan->sampai) <= strtotime(date('Y-m-d'))) {
+                    $warna = 'class="alert alert-danger"';
+                }
+
+                
 
                 ?>
                 <tr <?php echo $warna ?>>

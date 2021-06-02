@@ -38,6 +38,126 @@ class App extends CI_Controller {
         }
     }
 
+    public function tes()
+    {
+        $tanggal = '2024-12-28 00:59:59';
+        $tanggal = new DateTime($tanggal); 
+
+        $sekarang = new DateTime();
+
+        $perbedaan = $tanggal->diff($sekarang);
+
+        //gabungkan
+        echo $perbedaan->y.' selisih tahun.';
+        echo $perbedaan->m.' selisih bulan.';
+        echo $perbedaan->d.' selisih hari.';
+        echo $perbedaan->h.' selisih jam.';
+        echo $perbedaan->i.' selisih menit.';
+    }
+
+    public function cek_perizinan()
+    {
+        $perizinan = $this->db->get('perizinan');
+        if ($perizinan->num_rows() > 0) {
+            foreach ($perizinan->result() as $rw) {
+
+                if ($rw->jenis == 'HGU' || $rw->jenis == 'HGB') {
+                    $tanggal = "$rw->sampai 00:59:59";
+                    $tanggal = new DateTime($tanggal); 
+
+                    $sekarang = new DateTime();
+
+                    $perbedaan = $tanggal->diff($sekarang);
+                    if ($perbedaan->y == 2) {
+                        echo "notifikasi terikirim perizinan HGB HGU !<br>";
+                        echo $rw->id_perizinan;
+
+                        // Dikirim ke APK, GM, Manajer, ATU, Askep, Kasubaghukum, Staf Hukum, Kasubag Pertanahan dan Keamanan.
+
+                        $title = "Perizinan";
+                        $id = '';
+                        $pesan = "Perizinan $rw->jenis akan berakhir 2 tahun lagi";
+                        $method = "1";
+
+                        $this->db->where('id_level', '1');
+                        $this->db->or_where('id_level', '2');
+                        $this->db->or_where('id_level', '4');
+                        $this->db->or_where('id_level', '5');
+                        $this->db->or_where('id_level', '6');
+                        $this->db->or_where('id_level', '8');
+                        $this->db->or_where('id_level', '9');
+                        foreach ($this->db->get('users')->result() as $br) {
+                            $this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $br->token);
+                        }
+
+
+                    } 
+                } else {
+                    
+                    $tanggal = "$rw->sampai 00:59:59";
+                    $tanggal = new DateTime($tanggal); 
+
+                    $sekarang = new DateTime();
+
+                    $perbedaan = $tanggal->diff($sekarang);
+                    if ($perbedaan->y == 0) {
+                        if ($perbedaan->m == 6) {
+                            echo "notifikasi terikirim non HGB !<br>";
+                            echo $rw->id_perizinan;
+
+                            // Dikirim ke APK, GM, Manajer, ATU, Askep, Kasubaghukum, Staf Hukum, Kasubag Pertanahan dan Keamanan.
+
+                            $title = "Perizinan";
+                            $id = '';
+                            $pesan = "Perizinan $rw->jenis akan berakhir 6 bulan lagi";
+                            $method = "1";
+
+                            $this->db->where('id_level', '1');
+                            $this->db->or_where('id_level', '2');
+                            $this->db->or_where('id_level', '4');
+                            $this->db->or_where('id_level', '5');
+                            $this->db->or_where('id_level', '6');
+                            $this->db->or_where('id_level', '8');
+                            $this->db->or_where('id_level', '9');
+                            foreach ($this->db->get('users')->result() as $br) {
+                                $this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $br->token);
+                            }
+                        } 
+                    }
+                    
+
+                    if (strtotime($rw->sampai) == strtotime(date('Y-m-d'))) {
+                        echo "berakhir <br>";
+                        echo $rw->id_perizinan;
+
+                        // Dikirim ke APK, GM, Manajer, ATU, Askep, Kasubaghukum, Staf Hukum, Kasubag Pertanahan dan Keamanan.
+
+                        $title = "Perizinan";
+                        $id = '';
+                        $pesan = "Perizinan $rw->jenis akan telah habis masanya";
+                        $method = "1";
+
+                        $this->db->where('id_level', '1');
+                        $this->db->or_where('id_level', '2');
+                        $this->db->or_where('id_level', '4');
+                        $this->db->or_where('id_level', '5');
+                        $this->db->or_where('id_level', '6');
+                        $this->db->or_where('id_level', '8');
+                        $this->db->or_where('id_level', '9');
+                        foreach ($this->db->get('users')->result() as $br) {
+                            $this->Notif_model->send_notif_topup($title, $id, $pesan, $method, $br->token);
+                        }
+                    }
+
+                }
+
+            }
+        } else {
+
+        }
+        
+    }
+
     public function pengembangan()
     {
         $this->session->set_flashdata('message', alert_biasa('Menu masih dalam tahap pengembangan !','warning'));
