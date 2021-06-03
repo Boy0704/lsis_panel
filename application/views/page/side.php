@@ -39,7 +39,7 @@
         <?php } elseif ($this->session->userdata('level') == 'user') {?>
 
         <li><a href="app"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-        <li><a href="asset"><i class="fa fa-book"></i> <span>Data Asset </span></a></li></li>
+        <li><a href="Agreement?&id_user=<?php echo $this->session->userdata('id_user'); ?>"><i class="fa fa-clone"></i> <span>Online Agreement  </span></a></li></li>
         <?php } ?>
         
         

@@ -15,18 +15,45 @@ class Login extends CI_Controller {
 			$password = md5($this->input->post('password'));
 
 			// $hashed = '$2y$10$LO9IzV0KAbocIBLQdgy.oeNDFSpRidTCjXSQPK45ZLI9890g242SG';
-			$cek_user = $this->db->query("SELECT * FROM a_user WHERE username='$username' and password='$password' ");
+
+			if ($username == 'admin') {
+				$cek_user = $this->db->query("SELECT * FROM a_user WHERE username='$username' and password='$password' ");
+			} else {
+				$password = $this->input->post('password');
+				$cek_user = $this->db->query("SELECT * FROM users WHERE username='$username' and password='$password' ");
+			}
+			
 			// if (password_verify($password, $hashed)) {
 			if ($cek_user->num_rows() > 0) {
-				foreach ($cek_user->result() as $row) {
+
+				if ($username == 'admin') {
+					foreach ($cek_user->result() as $row) {
 					
-                    $sess_data['id_user'] = $row->id_user;
-					$sess_data['nama'] = $row->nama_lengkap;
-					$sess_data['username'] = $row->username;
-					$sess_data['foto'] = $row->foto;
-					$sess_data['level'] = $row->level;
-					$this->session->set_userdata($sess_data);
+	                    $sess_data['id_user'] = $row->id_user;
+						$sess_data['nama'] = $row->nama_lengkap;
+						$sess_data['username'] = $row->username;
+						$sess_data['foto'] = $row->foto;
+						$sess_data['level'] = $row->level;
+						$this->session->set_userdata($sess_data);
+					}
+				} else {
+					if ($cek_user->row()->id_level == '6' || $cek_user->row()->id_level == '9') {
+						foreach ($cek_user->result() as $row) {
+					
+		                    $sess_data['id_user'] = $row->id_user;
+							$sess_data['nama'] = $row->nama;
+							$sess_data['username'] = $row->username;
+							$sess_data['foto'] = $row->foto;
+							$sess_data['level'] = 'user';
+							$this->session->set_userdata($sess_data);
+						}
+					} else {
+						$this->session->set_flashdata('message', alert_biasa('kamu tidak memiliki akses','warning'));
+						// $this->session->set_flashdata('message', alert_tunggu('Gagal Login!\n username atau password kamu salah','warning'));
+						redirect('login','refresh');
+					}
 				}
+				
 
 				// define('FOTO', $this->session->userdata('foto'), TRUE);
 				
@@ -38,7 +65,7 @@ class Login extends CI_Controller {
 				if ($this->session->userdata('level') == 'admin') {
 					redirect('app','refresh');
 				// 	echo 'Server TimeOut';
-				} elseif ($this->session->userdata('level') == 'operator') {
+				} elseif ($this->session->userdata('level') == 'user') {
 					redirect('app','refresh');
 				}
 

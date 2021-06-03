@@ -32,12 +32,12 @@
               <li class="user-footer">
                 <div class="pull-left">
                   <?php if ($this->session->userdata('level') == 'user'): ?>
-                    <a href="app/update_profil/<?php echo $this->session->userdata('id_user'); ?>" class="btn btn-default btn-flat">Profile</a>
+                    
                   <?php endif ?>
                 </div>
                 <div class="pull-right">
                   <?php if ($this->session->userdata('level') == 'user'): ?>
-                    <a href="login_user/logout" class="btn btn-default btn-flat">Keluar</a>
+                    <a href="login/logout" class="btn btn-default btn-flat">Keluar</a>
                   <?php else: ?>
                     <a href="login/logout" class="btn btn-default btn-flat">Keluar</a>
                   <?php endif ?>
