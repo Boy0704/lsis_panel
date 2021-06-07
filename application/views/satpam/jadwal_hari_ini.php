@@ -13,11 +13,14 @@
             <?php
             $start = 1;
 
-            $id_jadwal = get_data('jadwal_satpam','tanggal',date('Y-m-d'),'id_jadwal');
-
-            $this->db->where('id_jadwal', $id_jadwal);
-            foreach ($this->db->get('jadwal_satpam_detail')->result() as $jadwal_satpam_detail)
+            // $id_jadwal = get_data('jadwal_satpam','tanggal',date('Y-m-d'),'id_jadwal');
+            $this->db->select('jadwal_satpam.id_jadwal,jadwal_satpam_detail.*');
+            $this->db->from('jadwal_satpam');
+            $this->db->join('jadwal_satpam_detail', 'jadwal_satpam.id_jadwal = jadwal_satpam_detail.id_jadwal', 'inner');
+            $this->db->where('jadwal_satpam.tanggal', date('Y-m-d'));
+            foreach ($this->db->get()->result() as $jadwal_satpam_detail)
             {
+                // log_r($this->db->last_query());
                 ?>
                 <tr>
 			<td width="80px"><?php echo $start ?></td>

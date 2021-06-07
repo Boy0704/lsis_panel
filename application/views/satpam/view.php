@@ -18,7 +18,7 @@
 						<td><?php echo $no; ?></td>
 						<td><?php echo $rw->nama; ?></td>
 						<td>
-							<?php if ($this->session->userdata('level') == 'admin'): ?>
+							<?php if ($this->session->userdata('level') == 'admin' || $this->input->get('id_level') != '15'): ?>
 								<a href="satpam/cek_posisi/<?php echo $rw->id_user ?>" class="label label-info">Cek Posisi</a>
 								<a href="satpam/history/<?php echo $rw->id_user.'?mobile=1' ?>" class="label label-warning">History</a>
 								<a href="satpam/download/<?php echo $rw->id_user.'?mobile=1' ?>" class="label label-success">Download History</a>
