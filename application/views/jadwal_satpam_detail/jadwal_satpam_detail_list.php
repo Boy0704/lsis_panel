@@ -40,7 +40,7 @@
 			<td><?php echo $jadwal_satpam_detail->shift ?></td>
             <td><?php echo $jadwal_satpam_detail->area ?></td>
             <td><?php echo $jadwal_satpam_detail->created_at ?></td>
-			<td><?php echo get_data('users','id_user',$jadwal_satpam_detail->user_at,'nama') ?></td>
+			<td><?php echo $retVal = ($jadwal_satpam_detail->user_at == '1') ? 'Admin' : get_data('users','id_user',$jadwal_satpam_detail->user_at,'nama') ; ?></td>
 			<td style="text-align:center" width="200px">
 				<?php 
 				echo anchor(site_url('jadwal_satpam_detail/update/'.$jadwal_satpam_detail->id_jadwal_detail).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
