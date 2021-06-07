@@ -31,7 +31,7 @@
                     <a href="satpam/history/<?php echo $jadwal_satpam_detail->id_user.'?mobile=1' ?>" class="label label-warning">History</a>
                     <a href="satpam/download/<?php echo $jadwal_satpam_detail->id_user.'?mobile=1' ?>" class="label label-success">Download History</a>
                 <?php else: ?>
-                    <?php if ($rw->id_user == $this->input->get('id_user')): ?>
+                    <?php if ($jadwal_satpam_detail->id_user == $this->input->get('id_user')): ?>
                         <a href="satpam/cek_posisi/<?php echo $jadwal_satpam_detail->id_user ?>" class="label label-info">Cek Posisi</a>
                         <a href="satpam/history/<?php echo $jadwal_satpam_detail->id_user.'?mobile=1' ?>" class="label label-warning">History</a>
                         <a href="satpam/download/<?php echo $jadwal_satpam_detail->id_user.'?mobile=1' ?>" class="label label-success">Download History</a>
