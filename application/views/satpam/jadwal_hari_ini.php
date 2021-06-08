@@ -36,7 +36,7 @@
                     
                 <?php endif ?>
 
-                <?php if ($this->input->get('mobile') == '1' && $this->input->get('id_level') != '15'): ?>
+                <?php if ($this->input->get('mobile') == '1' && $this->input->get('id_level') != '14'): ?>
                     <a href="satpam/cek_posisi/<?php echo $jadwal_satpam_detail->id_user ?>" class="label label-info">Cek Posisi</a>
                     <a href="satpam/history/<?php echo $jadwal_satpam_detail->id_user.'?mobile=1' ?>" class="label label-warning">History</a>
                     <a href="satpam/download/<?php echo $jadwal_satpam_detail->id_user.'?mobile=1' ?>" class="label label-success">Download History</a>
