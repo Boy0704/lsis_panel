@@ -82,7 +82,7 @@
                 <a href="fruit/download/<?php echo $fruit->id_user.'?mobile=1' ?>" class="label label-success">Download History</a>
 				<?php 
 				if (isset($_GET['id_level'])) {
-                    if ($fruit->status != 'final' && $_GET['id_level'] == '15') {
+                    if ($fruit->status != 'final' && ($_GET['id_level'] == '15' || $_GET['id_level'] == '5' )) {
                         echo anchor(site_url('fruit/update/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
                     }
                 }
