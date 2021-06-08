@@ -2,7 +2,7 @@
         <div class="row" style="margin-bottom: 10px">
             <div class="col-md-4">
                 <?php if (isset($_GET['id_level'])): ?>
-                    <?php if ($_GET['id_level'] == '7' || $_GET['id_level'] == '14' || $_GET['id_level'] == '15'): ?>
+                    <?php if ($_GET['id_level'] == '7' || $_GET['id_level'] == '14' || $_GET['id_level'] == '15' || $_GET['id_level'] == '5'): ?>
                         <?php echo anchor(site_url('fruit/create').'?'.param_get(),'Create', 'class="btn btn-primary"'); ?>
                     <?php endif ?>
                 <?php endif ?>
