@@ -95,6 +95,12 @@
                     }
                     
                 }
+
+                if ($this->session->userdata('level') == 'admin') {
+                    echo anchor(site_url('fruit/update/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-info">Ubah</span>'); 
+                    echo ' | '; 
+                    echo anchor(site_url('fruit/delete/'.$fruit->id_fruit).'?'.param_get(),'<span class="label label-danger">Hapus</span>','onclick="javasciprt: return confirm(\'Are You Sure ?\')"');
+                }
 				 
 				?>
 			</td>

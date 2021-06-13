@@ -28,8 +28,7 @@
 		<th>Jenis</th>
 		<th>Nomor</th>
 		<th>Dasar Izin</th>
-		<th>Dari</th>
-		<th>Sampai</th>
+		<th>Batas waktu</th>
 		<th>Action</th>
             </tr>
             </thead>
@@ -83,8 +82,7 @@
 			<td><?php echo $perizinan->jenis ?></td>
 			<td><?php echo $perizinan->nomor ?></td>
 			<td><?php echo $perizinan->dasar_izin ?></td>
-			<td><?php echo $perizinan->dari ?></td>
-			<td><?php echo $perizinan->sampai ?></td>
+			<td><?php echo $retVal = ($perizinan->pilihan == 'tanggal') ? $perizinan->dari.' sampai '.$perizinan->sampai : $perizinan->khusus ; ?></td>
 			<td style="text-align:center" width="200px">
                 <?php if (isset($_GET['id_level'])): ?>
                     <?php if ($_GET['id_level'] == '5' || $_GET['id_level'] == '6' || $_GET['id_level'] == '8' || $_GET['id_level'] == '9' ): ?>

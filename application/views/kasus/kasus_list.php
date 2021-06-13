@@ -32,6 +32,7 @@
 		<th>Lokasi</th>
 		<th>Nama Tersangka</th>
 		<th>Tindak Lanjut</th>
+        <th>Dokumen</th>
 		<th>Keterangan</th>
 		<th>Action</th>
             </tr>

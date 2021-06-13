@@ -78,7 +78,9 @@ class Perizinan extends CI_Controller
 	    'nomor' => set_value('nomor'),
 	    'dasar_izin' => set_value('dasar_izin'),
 	    'dari' => set_value('dari'),
-	    'sampai' => set_value('sampai'),
+        'sampai' => set_value('sampai'),
+        'pilihan' => set_value('pilihan'),
+	    'khusus' => set_value('khusus'),
 	);
         $this->load->view('v_index', $data);
     }
@@ -96,7 +98,9 @@ class Perizinan extends CI_Controller
 		'nomor' => $this->input->post('nomor',TRUE),
 		'dasar_izin' => $this->input->post('dasar_izin',TRUE),
 		'dari' => $this->input->post('dari',TRUE),
-		'sampai' => $this->input->post('sampai',TRUE),
+        'sampai' => $this->input->post('sampai',TRUE),
+        'pilihan' => $this->input->post('pilihan',TRUE),
+		'khusus' => $this->input->post('khusus',TRUE),
 	    );
 
             $this->Perizinan_model->insert($data);
@@ -121,7 +125,9 @@ class Perizinan extends CI_Controller
 		'nomor' => set_value('nomor', $row->nomor),
 		'dasar_izin' => set_value('dasar_izin', $row->dasar_izin),
 		'dari' => set_value('dari', $row->dari),
-		'sampai' => set_value('sampai', $row->sampai),
+        'sampai' => set_value('sampai', $row->sampai),
+        'pilihan' => set_value('pilihan', $row->pilihan),
+		'khusus' => set_value('khusus', $row->khusus),
 	    );
             $this->load->view('v_index', $data);
         } else {
@@ -143,7 +149,9 @@ class Perizinan extends CI_Controller
 		'nomor' => $this->input->post('nomor',TRUE),
 		'dasar_izin' => $this->input->post('dasar_izin',TRUE),
 		'dari' => $this->input->post('dari',TRUE),
-		'sampai' => $this->input->post('sampai',TRUE),
+        'sampai' => $this->input->post('sampai',TRUE),
+		'pilihan' => $this->input->post('pilihan',TRUE),
+        'khusus' => $this->input->post('khusus',TRUE),
 	    );
 
             $this->Perizinan_model->update($this->input->post('id_perizinan', TRUE), $data);
@@ -172,8 +180,8 @@ class Perizinan extends CI_Controller
 	$this->form_validation->set_rules('jenis', 'jenis', 'trim|required');
 	$this->form_validation->set_rules('nomor', 'nomor', 'trim|required');
 	$this->form_validation->set_rules('dasar_izin', 'dasar izin', 'trim|required');
-	$this->form_validation->set_rules('dari', 'dari', 'trim|required');
-	$this->form_validation->set_rules('sampai', 'sampai', 'trim|required');
+	// $this->form_validation->set_rules('dari', 'dari', 'trim|required');
+	// $this->form_validation->set_rules('sampai', 'sampai', 'trim|required');
 
 	$this->form_validation->set_rules('id_perizinan', 'id_perizinan', 'trim');
 	$this->form_validation->set_error_delimiters('<span class="text-danger">', '</span>');

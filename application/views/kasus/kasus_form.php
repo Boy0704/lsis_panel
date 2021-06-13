@@ -1,5 +1,5 @@
 
-        <form action="<?php echo $action.'?'.param_get(); ?>" method="post">
+        <form action="<?php echo $action.'?'.param_get(); ?>" method="post" enctype="multipart/form-data">
 	    <div class="form-group">
             <label for="varchar">Nomor Surat <?php echo form_error('nomor_surat') ?></label>
             <input type="text" class="form-control" name="nomor_surat" id="nomor_surat" placeholder="Nomor Surat" value="<?php echo $nomor_surat; ?>" />
@@ -35,6 +35,17 @@
 	    <div class="form-group">
             <label for="tindak_lanjut">Tindak Lanjut <?php echo form_error('tindak_lanjut') ?></label>
             <textarea class="form-control" rows="3" name="tindak_lanjut" id="tindak_lanjut" placeholder="Tindak Lanjut"><?php echo $tindak_lanjut; ?></textarea>
+        </div>
+        <div class="form-group">
+            <label>Upload Dokumen</label>
+            <input type="file" name="dokumen" class="form-control">
+            <input type="hidden" name="dokumen_old" value="<?php echo $dokumen ?>">
+            <div>
+                <?php if ($dokumen != ''): ?>
+                    <b>*) Dokumen Sebelumnya : </b><br>
+                    <a href="image/user/<?php echo $dokumen ?>"><?php echo $dokumen ?></a>
+                <?php endif ?>
+            </div>
         </div>
 	    <div class="form-group">
             <label for="keterangan">Keterangan <?php echo form_error('keterangan') ?></label>
