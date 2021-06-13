@@ -336,6 +336,7 @@ class Api extends REST_Controller {
         $data = array();
         foreach ($forums->result() as $rw) {
             array_push($data, array(
+                'id_jawaban' => $rw->id_jawaban,
                 'jawaban' => $rw->jawaban,
                 'id_user'=> $rw->id_user,
                 'nama_penjawab' => get_data('users','id_user',$rw->id_user,'nama'),
