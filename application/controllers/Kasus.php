@@ -142,7 +142,7 @@ class Kasus extends CI_Controller
 		'lokasi' => set_value('lokasi', $row->lokasi),
 		'nama_tersangka' => set_value('nama_tersangka', $row->nama_tersangka),
 		'tindak_lanjut' => set_value('tindak_lanjut', $row->tindak_lanjut),
-        'dokumen' => $retVal = ($_FILES['dokumen']['name'] == '') ? $_POST['dokumen_old'] : upload_gambar_biasa('dokumen', 'files/kasus/', 'pdf', 10000, 'dokumen'),
+        'dokumen' => set_value('dokumen', $row->dokumen),
 		'keterangan' => set_value('keterangan', $row->keterangan),
 	    );
             $this->load->view('v_index', $data);
@@ -169,6 +169,7 @@ class Kasus extends CI_Controller
 		'lokasi' => $this->input->post('lokasi',TRUE),
 		'nama_tersangka' => $this->input->post('nama_tersangka',TRUE),
 		'tindak_lanjut' => $this->input->post('tindak_lanjut',TRUE),
+        'dokumen' => $$retVal = ($_FILES['dokumen']['name'] == '') ? $_POST['dokumen_old'] : upload_gambar_biasa('dokumen', 'files/kasus/', 'pdf', 10000, 'dokumen'),
 		'keterangan' => $this->input->post('keterangan',TRUE),
 	    );
 
