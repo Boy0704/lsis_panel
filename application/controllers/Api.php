@@ -91,6 +91,72 @@ class Api extends REST_Controller {
 		
 	}
 
+    public function hapus_pertanyaan_post()
+    {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header("WWW-Authenticate: Basic realm=\"Private Area\"");
+            header("HTTP/1.0 401 Unauthorized");
+            return false;
+        }
+
+        $data = file_get_contents("php://input");
+        $decoded_data = json_decode($data);
+
+        $this->db->where('id_user', $decoded_data->id_user);
+        $this->db->where('id_pertanyaan', $decoded_data->id_pertanyaan);
+        $hapus = $this->db->hapus('pertanyaan');
+        if ($hapus) {
+            $condition = array('data'=>'berhasil');
+            $message = array(
+                'kode' => '200',
+                'message' => 'berhasil hapus',
+                'data' => [$condition]
+            );
+        } else {
+            $condition = array('data'=>"kosong");
+            $message = array(
+                'kode' => '404',
+                'message' => 'gagal !',
+                'data' => [$condition]
+            );
+        }
+
+        $this->response($message, 200);
+    }
+
+    public function hapus_jawaban_post()
+    {
+        if (!isset($_SERVER['PHP_AUTH_USER'])) {
+            header("WWW-Authenticate: Basic realm=\"Private Area\"");
+            header("HTTP/1.0 401 Unauthorized");
+            return false;
+        }
+
+        $data = file_get_contents("php://input");
+        $decoded_data = json_decode($data);
+
+        $this->db->where('id_user', $decoded_data->id_user);
+        $this->db->where('id_jawaban', $decoded_data->id_jawaban);
+        $hapus = $this->db->hapus('jawaban');
+        if ($hapus) {
+            $condition = array('data'=>'berhasil');
+            $message = array(
+                'kode' => '200',
+                'message' => 'berhasil hapus',
+                'data' => [$condition]
+            );
+        } else {
+            $condition = array('data'=>"kosong");
+            $message = array(
+                'kode' => '404',
+                'message' => 'gagal !',
+                'data' => [$condition]
+            );
+        }
+
+        $this->response($message, 200);
+    }
+
     public function logout_post()
     {
         if (!isset($_SERVER['PHP_AUTH_USER'])) {
