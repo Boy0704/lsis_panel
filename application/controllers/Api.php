@@ -104,7 +104,7 @@ class Api extends REST_Controller {
 
         $this->db->where('id_user', $decoded_data->id_user);
         $this->db->where('id_pertanyaan', $decoded_data->id_pertanyaan);
-        $hapus = $this->db->hapus('pertanyaan');
+        $hapus = $this->db->delete('pertanyaan');
         if ($hapus) {
             $condition = array('data'=>'berhasil');
             $message = array(
@@ -137,7 +137,7 @@ class Api extends REST_Controller {
 
         $this->db->where('id_user', $decoded_data->id_user);
         $this->db->where('id_jawaban', $decoded_data->id_jawaban);
-        $hapus = $this->db->hapus('jawaban');
+        $hapus = $this->db->delete('jawaban');
         if ($hapus) {
             $condition = array('data'=>'berhasil');
             $message = array(
